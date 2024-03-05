@@ -1,1 +1,248 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+:root{
+    --fuenteTitulos: "Anta", sans-serif;
+    --fuentePrimaria: "Oswald", sans-serif;
+    --fuenteSecundaria: "Merriweather", serif;
+    --fuenteGenerica: "Montserrat", sans-serif;
+    --fuentePlaceholder: "Barlow Condensed", sans-serif;
+}
+html, body { 
+    height: 100%;
+}
+
+body{
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.card-container{
+    background: #C9D6FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border-radius: 1rem;
+    -webkit-box-shadow: 6px 5px 26px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 5px 26px -1px rgba(0,0,0,0.75);
+    box-shadow: 6px 5px 26px -1px rgba(0,0,0,0.75);
+    margin: 2rem 0 10rem 0;
+    width: 80%;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* text-align: center; */
+    justify-content: center;
+    margin-top: 10%;
+}
+.card-container{
+    background: #C9D6FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 1rem;
+    -webkit-box-shadow: 6px 5px 26px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 5px 26px -1px rgba(0,0,0,0.75);
+    box-shadow: 6px 5px 26px -1px rgba(0,0,0,0.75);
+    margin: 2rem 0 10rem 0;
+    width: 80%;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+.card-title{
+    font-family: var(--fuentePrimaria);
+    font-size: 2rem;
+}
+.input-container{
+    display: flex;
+    justify-content: center;   
+}
+.input {
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 1rem;
+    padding-left: 1rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f8fafc;
+    color: #0d0c22;
+    transition: .5s ease;
+    -webkit-box-shadow: 5px 1px 25px -9px rgba(17,17,33,1);
+    -moz-box-shadow: 5px 1px 25px -9px rgba(17,17,33,1);
+    box-shadow: 5px 1px 25px -9px rgba(17,17,33,1);   
+  }
+input::placeholder{
+    font-family: var(--fuentePlaceholder);
+    color: #94a3b8;
+}
+.input:focus, input:hover{
+    outline: none;
+}
+.group {
+    display: flex;
+    line-height: 30px;
+    align-items: center;
+    position: relative;
+    width: 90%;
+}
+.botones{
+    margin-top: 1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+.botones p{
+    font-family: var(--fuenteGenerica);
+    margin-bottom: 1rem;
+}
+.obligatorio{
+    color: red;
+    font-weight: bold;
+}
+
+@media(min-width: 400px){
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5%;
+    }
+    .card-container{
+        align-items: center;
+        width: 80%;
+    }
+    .img-login{
+        width: 30%;
+    } 
+         
+}
+@media(min-width: 800px){
+    .card-container{
+        align-items: center;
+        margin: 2rem 0 5rem;
+        width: 50%;
+    }
+}
+
+/* Sidebar */
+
+.example-container {
+    width: 100%;
+    height: 100vh;
+    background: #F7971E;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFD200, #F7971E);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFD200, #F7971E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  .example-sidenav{
+    width: 70%;
+  }
+  @media(min-width: 500px){
+    .example-sidenav{
+      width: 40%;
+    }
+  }
+  @media(min-width: 700px){
+    .example-sidenav{
+      width: 30%;
+    }
+  }
+  @media(min-width: 900px){
+    .example-sidenav{
+      width: 14%;
+    }
+  }
+  @media(min-width: 1100px){
+    .example-sidenav{
+      width: 14%;
+    }
+  }
+  .example-sidenav-content {
+    display: flex;
+    /* width: 100%; */
+    /* height: 100vh; */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .rotated {
+    transform: rotate(180deg); /* Puedes ajustar el ángulo de rotación según tus necesidades */
+  }
+
+
+.sidebar{
+    display: inline-block;
+    /* width: 15%; */
+    -webkit-box-shadow: 3px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 5px 5px 0px rgba(0,0,0,0.75);
+    background: #D3CCE3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.sidebar ul{
+    list-style: none;    
+    margin-left: 0;
+    padding: 0;
+    /* border: 3px solid rgb(62, 147, 14); */
+}
+
+.sidebar .seccion{
+    background-color: rgb(246, 242, 236);
+    font-family: var(--fuenteSecundaria);
+    padding: 0.7rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2px;
+    border: 3px solid #000;
+    -webkit-box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75);
+}
+
+.sidebar .seccion:hover{
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+    font-weight: bold;
+    border: 3px solid #0348af;
+    background-color: #7f92df;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5), -2px -2px 5px rgba(255, 255, 255, 0.5);
+
+}
+.sidebar .selected{
+    border: 3px solid #af0303;
+    background-color: #ea7f7f;
+}
+.sidebar .seccion a{
+    margin-left: 1rem;
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar .version{
+    text-align: center;
+    font-family: var(--fuenteGenerica);
+    font-size: 1rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
