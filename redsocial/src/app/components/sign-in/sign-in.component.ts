@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FooterComponent } from '../footer/footer.component';
 import { Router, RouterModule } from '@angular/router';
-import { BtnEnviarComponent } from '../botones/btn-enviar/btn-enviar.component';
-import { BtnRegresarComponent } from '../botones/btn-regresar/btn-regresar.component';
+import { BtnRegresarComponent } from '../btn-regresar/btn-regresar.component';
 import { FormsModule } from '@angular/forms';
 import { TituloComponent } from '../titulo/titulo.component';
+import { EnviarComponent } from '../enviar/enviar.component';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports:[FooterComponent, RouterModule, BtnEnviarComponent, BtnRegresarComponent, FormsModule, TituloComponent],
+  imports:[FooterComponent, RouterModule, BtnRegresarComponent, FormsModule, TituloComponent, EnviarComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })

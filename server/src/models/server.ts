@@ -2,6 +2,8 @@
 import express, {Application} from 'express';
 import routesProduct from '../routes/product';
 import routesUser from '../routes/user';
+import { Product } from './product.model';
+import sequelize from '../db/connection';
 
  class Server {
     private app: Application;
@@ -12,6 +14,7 @@ import routesUser from '../routes/user';
         this.port = process.env.PORT || '3001';
         this.middlewares();
         this.routes();
+        this.dbConnect();
 
     }
     listen(){
@@ -27,6 +30,15 @@ import routesUser from '../routes/user';
 
     middlewares(){
         this.app.use(express.json())
+    }
+    async dbConnect() {
+        try {
+            await Product.sync();
+            await sequelize.authenticate();
+            console.log('Connection has been established successfully.');
+        } catch (error) {
+            console.error('Unable to connect to the database:', error);
+        }
     }
 } 
 

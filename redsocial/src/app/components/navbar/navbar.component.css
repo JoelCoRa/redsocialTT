@@ -1,88 +1,142 @@
-.navbar{
-    -webkit-box-shadow: 3px 2px 13px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 2px 13px 0px rgba(0,0,0,0.75);
-    box-shadow: 3px 2px 13px 0px rgba(0,0,0,0.75);
-    /* width: 100%; */
+.navbar{   
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* -webkit-box-shadow: 5px 5px 17px 4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 17px 4px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 17px 4px rgba(0,0,0,0.75); */
+    z-index: 1000;
+    /* z-index: 1; */
+    /* margin-bottom: ; */
+    
+
 }
 .navbar-toggler{
     margin-right: 1rem;
 }
-/* @media(min-width: 400px){
-    .navbar{
-        flex-direction: row;    
-        justify-content: center;
-    }
 
-} */
-.navbar-collape{
+.navbar-collapse{
     flex-direction: row;
     justify-content: space-between;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
 }
 .logo{
-    width: 3.5%;
+    width: 10%;
     filter: invert(100%);
-    margin: 1rem;
-}
-.logo:hover{
-    cursor: pointer;
+    margin: 1rem 1rem 0 1rem;
 }
 .titulo-navbar{
     margin-top: 0.5rem;
     font-size: 1rem;
+    color: rgb(217, 223, 223);
+    text-align: center;
     font-family: var(--fuenteGenerica);
 }
-@media(min-width: 400px){
-    .titulo-navbar{
-        margin-top: 1rem;
-        font-size: 1.2rem;
-    }
-}
-@media(min-width: 800px){
-    .titulo-navbar{
-        font-size: 1.2rem;
-    }
-}
-.form-navbar{
+
+.iconos{    
     display: flex;
-    flex-direction: row;
-}
-.btn{
-    font-family: var(--fuenteSecundaria);
-}
-.busqueda{
-    display: flex;
-    flex-direction: row;
-    margin: 1rem;
-}
-.busqueda input{
-    margin-right: 0.5rem;
-}
-.faqs, .logout, .modo-oscuro, .modo-claro{
-    display: flex;
-    text-align: center;
-    
     flex-direction: column;
-    margin: 0.8rem 1rem 0 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0;
+    /* border: 1px sol  id #fff; */
 }
-
-
-.logout:hover,  .faqs:hover, .modo-oscuro:hover, .modo-claro:hover{
-    cursor: pointer;    
-    filter: invert(50%);
-    transform: scale(120%);    
-    transition: all 0.5s ease-in;
+.icono{
+    width: 90%;
+    border: 1px solid #e2b76b;
+    border-radius: 1rem;
+    padding: 0.2rem;
+    margin: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
-form span {
-    font-size: 0.6rem;
+.icono .cont-span span{    
+    align-items: center;
+    color: #fff;
+    font-size: 1.2rem;
     line-height: 1;
+    align-items: center;
     font-family: var(--fuenteGenerica);
     word-wrap: break-word;
+    margin: 0.8rem 1rem 0 1rem;
 }
 .navbar-toggler {
     display: none;
-  }
+}
+
+@media(min-width: 600px){
+    .titulo-navbar{
+        font-size: 1.5rem;
+    }   
+    
+    .navbar-collapse{
+        justify-content: space-around;
+    }   
+    .iconos{
+        width: 80%;
+        flex-direction: row;
+        margin: 0 auto;
+    }   
+    
+    .icono{
+        flex-direction: column;
+        align-items: center;
+        border-radius: 1rem;
+        padding: 1rem 0;       
+    }
+    .iconos .cont-span span{
+        font-size: 0.8rem;
+        text-align: center;
+        line-height: 0.2rem;
+    } 
+}
+@media(min-width: 1000px){
+    .logo{
+        margin: 1rem;
+        width: 3.5%;
+    }
+    .logo:hover{
+        cursor: pointer;
+    }
+    .iconos{
+        width: 45%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 1rem 0;
+        /* border: 1px solid #fff; */
+    }   
+    
+    .icono{
+        flex-direction: column;
+        align-items: center;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem 0 0 0;       
+    }
+    .iconos .cont-span span{
+        font-size: 0.7rem;
+        text-align: center;
+        line-height: 0.2rem;
+    }
+    .icono:hover{
+        cursor: pointer;  
+        /* filter: invert(60%); */
+        transform: scale(110%);    
+        transition: all 0.5s ease-in;
+        visibility: visible;
+    }
+}
   
-  @media (max-width: 991px) {
+@media (max-width: 991px) {
     .navbar-toggler {
       display: block;
     }
@@ -94,8 +148,7 @@ form span {
     .navbar-collapse.show {
       display: block;
     }
-  }
-
-
-
+    
+   
+}
 
