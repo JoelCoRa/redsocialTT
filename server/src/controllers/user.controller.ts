@@ -1,25 +1,86 @@
 import {Request, Response} from 'express';
+import  bcrypt  from 'bcrypt'
+import { User } from '../models/user.model';
+import jwt from 'jsonwebtoken';
 
 
 
-export const newUser = (req: Request, res: Response) => {
+export const newUser = async (req: Request, res: Response) => {
+    const {nombres, apellidos, fechaNacimiento, sexo, correo, nombreUsuario, password, imgPerfil, fechaRegistro, cuentasSeguidas, seguidores, publicaciones, foros, solicitudes, reportes, tipoUsuario, modoOscuro, notificaciones} = req.body;    
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const {body} = req
+    // Se valida si el usuario existe en la BD
+    const user = await User.findOne({where:{ nombreUsuario: nombreUsuario }});
+    if(user){
+        return res.status(400).json({
+            msg: `Ya existe un usuario con el username ${nombreUsuario}`            
+        });
+    }   
 
+    try{
+        // Se guarda el Usuario en la BD
+        await User.create({
+            nombres: nombres,
+            apellidos: apellidos,
+            fechaNacimiento: fechaNacimiento,
+            sexo: sexo,
+            correo: correo,        
+            nombreUsuario: nombreUsuario,
+            password: hashedPassword,
+            imgPerfil: imgPerfil,
+            fechaRegistro: fechaRegistro,
+            cuentasSeguidas: cuentasSeguidas,
+            seguidores: seguidores,
+            publicaciones: publicaciones,
+            foros: foros,
+            solicitudes: solicitudes,
+            reportes: reportes,
+            tipoUsuario: tipoUsuario,
+            modoOscuro: modoOscuro,
+            notificaciones: notificaciones,
+        });
+    } catch(error){
+        res.status(400).json({
+            msg: "Oops ocurrio un error!",
+            error
+        });
+    }
+    
     res.json({
-        msg: 'New User',
-        body: body
+        msg: `Usuario ${nombreUsuario} creado exitosamente!`,
     })
 
 }
 
-export const loginUser = (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
 
-    const {body} = req
+    const {nombreUsuario, password} = req.body;
     
-    res.json({
-        msg: 'login user',
-        body: body
-    })
+    // res.json({
+    //     msg: 'login user',
+    //     body: body
+    // })
+    // Se valida que el usuario exista en al BD
+    const user:any = await User.findOne({where: {nombreUsuario: nombreUsuario}});
+    if(!user){
+        return res.status(400).json({
+            msg: `No existe un usuario con el nombre ${nombreUsuario} en la BD`
+        });
+    }
+    // Se valida el password
+    const passwordValid = await bcrypt.compare(password, user.password);
+    if(!passwordValid){
+        return res.status(400).json({
+            msg: `La contraseña es incorrecta!`
+        })
+    }
+    // Se genera el token
+    const token =  jwt.sign({
+        nombreUsuario: nombreUsuario
+    }, process.env.SECRET_KEY || 'pepito123', {
+        expiresIn: '10000'
+    });
+
+    res.json({token});
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-enviar',
   standalone: true,
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './enviar.component.css'
 })
 export class EnviarComponent {
-
+  disabled: boolean = false;
 }

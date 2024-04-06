@@ -6,29 +6,29 @@
               <h5 class="card-title">Crea una cuenta</h5>
               <hr>
               <div class="mb-2 input-container">
-                <div class="form">
+                <form class="form" [formGroup]="signInForm" (ngSubmit)="onSubmit()"> 
                   <!-- Datos generales -->
                   <p class="seccion">Datos generales</p>
                   <div class="row">
                     <div class="col-sm-12 col-md-6">
                       <div class="campo">
                         <label for="">Nombre(s) <span class="obligatorio">*</span></label>
-                        <input class="input" placeholder="Nombre" required="" type="text">
+                        <input class="input" placeholder="Nombre" type="text" formControlName="nombre" [class.is-invalid]="signInForm.get('nombre')?.touched && signInForm.get('nombre')?.invalid">
                         <span class="input-border"></span>
                       </div>                   
                       <div class="campo">
                         <label for="">Apellidos(s) <span class="obligatorio">*</span></label>
-                        <input class="input" placeholder="Apellido(s)" required="" type="text">
+                        <input class="input" placeholder="Apellido(s)" required="" type="text" formControlName="apellido" [class.is-invalid]="signInForm.get('apellido')?.touched && signInForm.get('apellido')?.invalid">
                         <span class="input-border"></span>
                       </div>                      
                     </div>    
                     <div class="col-sm-12 col-md-6">
                       <div class="campo">
                         <label for="">Fecha de nacimiento <span class="obligatorio">*</span></label>
-                        <input class="input" required="" type="date">
+                        <input class="input" required="" type="date" formControlName="fechaNac">
                       <span class="input-border"></span>
                       </div>
-                      <div class="campo">
+                      <div class="campo" >
                         <label for="">Sexo <span class="obligatorio">*</span></label>
                         <select class="input">
                           <option value="hombre" selected disabled>--Seleccionar</option>
@@ -48,7 +48,7 @@
                     <div class="col-sm-12 col-md-6">
                       <div class="campo">
                         <label for="">Ingresa un Correo <span class="obligatorio">*</span></label>
-                        <input class="input" placeholder="Correo" required="" type="text">
+                        <input class="input" placeholder="Correo" required="" type="text" formControlName="correo">
                         <span class="input-border"></span>
                       </div> 
                     </div>
@@ -56,7 +56,7 @@
                     <div class="col-sm-12 col-md-6">
                       <div class="campo">
                         <label for="">Elige un nombre de usuario<span class="obligatorio">*</span></label>
-                        <input class="input" placeholder="Nombre de Usuario" required="" type="text">
+                        <input class="input" placeholder="Nombre de Usuario" required="" type="text" formControlName="username">
                         <span class="input-border"></span>
                       </div> 
                     </div>
@@ -65,22 +65,23 @@
                     <div class="col-sm-12 col-md-6">
                       <div class="campo">
                         <label for="">Crea una contraseña<span class="obligatorio">*</span></label>
-                        <input class="input" placeholder="Contraseña" required="" type="password">
+                        <input class="input" placeholder="Contraseña" required="" type="password" formControlName="password">
                         <span class="input-border"></span>
                       </div> 
                     </div>
                     <div class="col-sm-12 col-md-6">
                       <div class="campo">
-                        <label for="">Repite la contraseña<span class="obligatorio">*</span></label>
-                        <input class="input" placeholder="Contraseña" required="" type="password">
+                        <label for="">Confrima la contraseña<span class="obligatorio">*</span></label>
+                        <input class="input" placeholder="Contraseña" required="" type="password" formControlName="confirmP">
                         <span class="input-border"></span>
                       </div> 
+                      
                     </div>
                   </div>                                   
-                </div>              
+                </form>              
               </div>
               <div class="botones">
-                <app-enviar routerLink="/login"></app-enviar>
+                <app-enviar (click)="onSubmit()"></app-enviar>
                 <app-btn-regresar routerLink="/login"></app-btn-regresar>               
               </div>             
             </div>

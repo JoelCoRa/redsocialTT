@@ -1,31 +1,36 @@
 import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-chatbot',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './chatbot.component.html',
   styleUrl: './chatbot.component.css'
 })
 export class ChatbotComponent {
 
   isFullSize: boolean = true;
+window: any;
+
+
+
+  
+
+  showPopup: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.checkScreenSize();
+    // Detecta cambios en la dimensión de la ventana y actualiza el estado de la ventana emergente según corresponda
+    this.showPopup = window.innerWidth >= 1000;
   }
 
-  constructor() {
-    this.checkScreenSize();
+  openPopup() {
+    this.showPopup = true;
   }
 
-  checkScreenSize() {
-    if (window.innerWidth <= 1000) {
-      this.isFullSize = false;
-    } else {
-      this.isFullSize = true;
-    }
+  closePopup() {
+    this.showPopup = false;
   }
 
 }

@@ -13,10 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const product_1 = __importDefault(require("../routes/product"));
 const user_1 = __importDefault(require("../routes/user"));
-const product_model_1 = require("./product.model");
+const dashboard_1 = __importDefault(require("../routes/dashboard"));
 const connection_1 = __importDefault(require("../db/connection"));
+const user_model_1 = require("./user.model");
+const post_model_1 = require("./post.model");
+const foro_model_1 = require("./foro.model");
+const recurso_model_1 = require("./recurso.model");
+const solicitud_model_1 = require("./solicitud.model");
+const reporte_model_1 = require("./reporte.model");
+const organizacion_model_1 = require("./organizacion.model");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -31,7 +37,7 @@ class Server {
         });
     }
     routes() {
-        this.app.use('/api/products', product_1.default);
+        this.app.use('/api/inicio', dashboard_1.default);
         this.app.use('/api/users', user_1.default);
     }
     middlewares() {
@@ -40,7 +46,13 @@ class Server {
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield product_model_1.Product.sync();
+                yield user_model_1.User.sync();
+                yield post_model_1.Post.sync();
+                yield foro_model_1.Foro.sync();
+                yield recurso_model_1.Recurso.sync(); // Cambiar usuario por organizacion en FK
+                yield solicitud_model_1.Solicitud.sync();
+                yield reporte_model_1.Reporte.sync();
+                yield organizacion_model_1.Organizacion.sync();
                 yield connection_1.default.authenticate();
                 console.log('Connection has been established successfully.');
             }

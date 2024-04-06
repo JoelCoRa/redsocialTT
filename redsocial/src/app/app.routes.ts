@@ -13,7 +13,7 @@ import { ContactComponent } from './components/secciones/contact/contact.compone
 import { HelpComponent } from './components/secciones/help/help.component';
 
 export const routes: Routes = [
-    {path: '',component: LoginComponent, pathMatch:'full'},
+    {path: '', redirectTo:'login', pathMatch:'full'},
     {path: 'login', component: LoginComponent},
     {path: 'signin', component: SignInComponent},
     {path: 'recpassword', component: RecuperarPasswordComponent},
@@ -24,6 +24,7 @@ export const routes: Routes = [
     {path: 'recursos', component: ResourcesComponent},
     {path: 'ajustes', component: SettingsComponent},
     {path: 'contacto', component: ContactComponent},
-    {path: 'ayuda', component: HelpComponent}
+    {path: 'ayuda', component: HelpComponent},
+    {path: '**', redirectTo:'login', pathMatch:'full'}
 
 ];

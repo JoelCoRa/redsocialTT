@@ -156,3 +156,35 @@ input::placeholder{
 .title-section{
     background-color: #b02121;
 }
+
+
+
+/* Notificaciones */
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface{
+    background-color: unset !important;
+}
+.mat-mdc-snack-bar-container .mdc-snackbar__label{
+    font-size: unset !important;
+    font-family: unset !important;
+}
+.notifError, .notifExito{
+    font-size: 1.2rem;
+    font-family: var(--fuentePlaceholder); 
+}
+.notifError{
+    background-color: #be3940 !important;    
+}
+.notifExito{
+    background-color: #39be3b !important;
+}
+
+ .mdc-button__label{
+    color: #e9f0ea;
+    font-family: var(--fuentePrimaria);
+    font-size: 1.2rem;
+}
+
+/* .mdc-button__label{
+    color: #35cc49;
+} */

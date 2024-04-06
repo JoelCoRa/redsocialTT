@@ -1,9 +1,15 @@
 
 import express, {Application} from 'express';
-import routesProduct from '../routes/product';
 import routesUser from '../routes/user';
-import { Product } from './product.model';
+import routesDashboard from '../routes/dashboard';
 import sequelize from '../db/connection';
+import { User } from './user.model';
+import { Post } from './post.model';
+import { Foro } from './foro.model';
+import { Recurso } from './recurso.model';
+import { Solicitud } from './solicitud.model';
+import { Reporte } from './reporte.model';
+import { Organizacion } from './organizacion.model';
 
  class Server {
     private app: Application;
@@ -24,7 +30,7 @@ import sequelize from '../db/connection';
     }
 
     routes(){
-        this.app.use('/api/products',routesProduct);
+        this.app.use('/api/inicio', routesDashboard);
         this.app.use('/api/users', routesUser);
     }
 
@@ -33,7 +39,13 @@ import sequelize from '../db/connection';
     }
     async dbConnect() {
         try {
-            await Product.sync();
+            await User.sync();
+            await Post.sync();
+            await Foro.sync();
+            await Recurso.sync(); // Cambiar usuario por organizacion en FK
+            await Solicitud.sync(); 
+            await Reporte.sync(); 
+            await Organizacion.sync(); 
             await sequelize.authenticate();
             console.log('Connection has been established successfully.');
         } catch (error) {
@@ -43,4 +55,4 @@ import sequelize from '../db/connection';
 } 
 
 
-export default Server
+export default Server;

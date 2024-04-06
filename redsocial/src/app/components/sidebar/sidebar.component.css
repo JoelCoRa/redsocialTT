@@ -7,9 +7,9 @@
     background: -webkit-linear-gradient(to right, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: transparent;
-    margin-top: 5rem;
+    margin-top: 3.1rem;
     position: relative;
-    top: 3.2rem;
+    top: 0;
     
     /* top: 0; */
   }
@@ -28,6 +28,10 @@
     .example-sidenav{
       width: 40%;
     }
+    .example-container{
+      margin-top: 3.7rem;
+    }
+    
   }
   @media(min-width: 700px){
     .example-sidenav{
@@ -38,6 +42,10 @@
     .example-sidenav{
       width: 20%;
     }
+    .example-container{
+      margin-top: 5rem;
+    }
+    
   }
 
   .example-sidenav-content {
@@ -46,6 +54,8 @@
     /* height: 100vh; */
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
+    width: 95%;
     
   }
   
@@ -77,11 +87,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 2px;
+    margin: 0 1rem 2px 1rem;
     border: 3px solid #000;
-    -webkit-box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75);
+    border-radius: 1rem;
+    /* -webkit-box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75);
-    box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 5px 18px 0px rgba(0,0,0,0.75); */
 }
 
 .sidebar .seccion:hover{
@@ -112,14 +123,15 @@
 .example-sidenav-content{
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
   /* margin-left: 3%; */
 }
-@media(min-width: 500px){
+@media(min-width: 700px){
   .example-sidenav-content{
     justify-content: start;
     align-items: start;
     margin: 1% 4%;
-    width: 68%;
+    width: 95%;
   }
 }
 

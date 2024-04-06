@@ -1,14 +1,12 @@
 .navbar{   
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%; 
+    /* height: 5.5rem; */
     background: #232526;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /* -webkit-box-shadow: 5px 5px 17px 4px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 17px 4px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 17px 4px rgba(0,0,0,0.75); */
+
     z-index: 1000;
     /* z-index: 1; */
     /* margin-bottom: ; */
@@ -29,10 +27,10 @@
 .logo{
     width: 10%;
     filter: invert(100%);
-    margin: 1rem 1rem 0 1rem;
+    margin: 0 1rem 0 1rem;
 }
 .titulo-navbar{
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
     font-size: 1rem;
     color: rgb(217, 223, 223);
     text-align: center;
@@ -76,9 +74,12 @@
     .titulo-navbar{
         font-size: 1.5rem;
     }   
+    .logo{
+        width: 5%;
+    }
     
     .navbar-collapse{
-        justify-content: space-around;
+        justify-content: space-between;
     }   
     .iconos{
         width: 80%;
@@ -99,8 +100,11 @@
     } 
 }
 @media(min-width: 1000px){
+    .navbar{
+        height: 5rem;
+    }
     .logo{
-        margin: 1rem;
+        margin: 0;
         width: 3.5%;
     }
     .logo:hover{
@@ -111,7 +115,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        margin: 0 0 1rem 0;
+        margin: 0;
         /* border: 1px solid #fff; */
     }   
     
@@ -120,7 +124,7 @@
         align-items: center;
         border: none;
         border-radius: 1rem;
-        padding: 1rem 0 0 0;       
+        padding: 0 0 0 0;       
     }
     .iconos .cont-span span{
         font-size: 0.7rem;

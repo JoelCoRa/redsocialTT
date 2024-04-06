@@ -7,12 +7,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { FooterComponent } from '../footer/footer.component';
 import { EnviarComponent } from '../enviar/enviar.component';
+import { ChatbotComponent } from '../chatbot/chatbot.component';
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [MatButtonModule, RouterModule, MatFormFieldModule, MatSidenavModule, MensajeSidebarComponent, FooterComponent, EnviarComponent],
+  imports: [MatButtonModule, RouterModule, MatFormFieldModule, MatSidenavModule, MensajeSidebarComponent, FooterComponent, EnviarComponent, ChatbotComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
