@@ -11,8 +11,14 @@
   background-color: #fff;
   box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
 }
+.card-title{
+  font-size: 1.7rem;
+  font-family: var(--fuentePrimaria);
+}
 .botones{    
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 } 
 .campo{
   text-align: start;
@@ -26,10 +32,9 @@
 }  
 
 
-@media(min-width: 400px){    
+@media(min-width: 500px){    
   .botones{    
     padding: 0;
-    display: flex;
     flex-direction: row;
     margin-top: 1rem;
     justify-content: space-around;
@@ -37,9 +42,13 @@
 }
 
 @media(min-width: 800px){
-  card-container{
+  .card-container{
     margin: 2rem 0 1rem 0;
-    width: 70%;
-  }    
+    width: 60%;
+  }   
+  label{
+    margin-top: 1rem;
+  }
+
 }
 

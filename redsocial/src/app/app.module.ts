@@ -6,8 +6,8 @@ import { DashboardComponent } from "./components/secciones/dashboard/dashboard.c
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from "@angular/common/http";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+
 
 @NgModule({
     imports:[
@@ -16,7 +16,6 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         RouterModule, 
         ReactiveFormsModule,
         CommonModule,
-        HttpClientModule,
         MatSnackBarModule,
 
     ],

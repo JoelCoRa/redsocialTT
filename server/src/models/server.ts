@@ -10,6 +10,7 @@ import { Recurso } from './recurso.model';
 import { Solicitud } from './solicitud.model';
 import { Reporte } from './reporte.model';
 import { Organizacion } from './organizacion.model';
+import cors from 'cors'
 
  class Server {
     private app: Application;
@@ -35,7 +36,11 @@ import { Organizacion } from './organizacion.model';
     }
 
     middlewares(){
-        this.app.use(express.json())
+        // Parseo body
+        this.app.use(express.json());
+
+        // Cors
+        this.app.use(cors())
     }
     async dbConnect() {
         try {

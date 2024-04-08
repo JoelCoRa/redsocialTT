@@ -17,7 +17,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_model_1 = require("../models/user.model");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nombres, apellidos, fechaNacimiento, sexo, correo, nombreUsuario, password, imgPerfil, fechaRegistro, cuentasSeguidas, seguidores, publicaciones, foros, solicitudes, reportes, tipoUsuario, modoOscuro, notificaciones } = req.body;
+    const { nombre, apellido, fechaNacimiento, sexo, correo, nombreUsuario, password, imgPerfil, fechaRegistro, cuentasSeguidas, seguidores, publicaciones, foros, solicitudes, reportes, tipoUsuario, modoOscuro, notificaciones } = req.body;
     const hashedPassword = yield bcrypt_1.default.hash(password, 10);
     // Se valida si el usuario existe en la BD
     const user = yield user_model_1.User.findOne({ where: { nombreUsuario: nombreUsuario } });
@@ -29,8 +29,8 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Se guarda el Usuario en la BD
         yield user_model_1.User.create({
-            nombres: nombres,
-            apellidos: apellidos,
+            nombre: nombre,
+            apellido: apellido,
             fechaNacimiento: fechaNacimiento,
             sexo: sexo,
             correo: correo,

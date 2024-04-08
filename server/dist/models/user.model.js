@@ -12,21 +12,23 @@ exports.User = connection_1.default.define('user', {
         primaryKey: true,
         autoIncrement: true
     },
-    nombres: {
+    nombre: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
-    apellidos: {
+    apellido: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
     fechaNacimiento: {
         type: sequelize_1.DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: connection_1.default.literal('CURRENT_TIMESTAMP')
     },
     sexo: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'Otro'
     },
     correo: {
         type: sequelize_1.DataTypes.STRING,
@@ -44,46 +46,56 @@ exports.User = connection_1.default.define('user', {
     },
     imgPerfil: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: ''
     },
     fechaRegistro: {
         type: sequelize_1.DataTypes.DATE,
-        allowNull: false
+        defaultValue: connection_1.default.literal('CURRENT_TIMESTAMP')
     },
     cuentasSeguidas: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     seguidores: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     publicaciones: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     foros: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     solicitudes: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     reportes: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     tipoUsuario: {
         type: sequelize_1.DataTypes.TINYINT,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     modoOscuro: {
         type: sequelize_1.DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
     },
     notificaciones: {
         type: sequelize_1.DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
     },
 });

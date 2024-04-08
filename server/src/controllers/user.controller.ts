@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 
 
 export const newUser = async (req: Request, res: Response) => {
-    const {nombres, apellidos, fechaNacimiento, sexo, correo, nombreUsuario, password, imgPerfil, fechaRegistro, cuentasSeguidas, seguidores, publicaciones, foros, solicitudes, reportes, tipoUsuario, modoOscuro, notificaciones} = req.body;    
+    const {nombre, apellido, fechaNacimiento, sexo, correo, nombreUsuario, password, imgPerfil, fechaRegistro, cuentasSeguidas, seguidores, publicaciones, foros, solicitudes, reportes, tipoUsuario, modoOscuro, notificaciones} = req.body;    
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Se valida si el usuario existe en la BD
@@ -20,8 +20,8 @@ export const newUser = async (req: Request, res: Response) => {
     try{
         // Se guarda el Usuario en la BD
         await User.create({
-            nombres: nombres,
-            apellidos: apellidos,
+            nombre: nombre,
+            apellido: apellido,
             fechaNacimiento: fechaNacimiento,
             sexo: sexo,
             correo: correo,        

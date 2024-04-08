@@ -3,6 +3,10 @@
     align-self: center;
     width: 50%;
 } 
+.card-title{
+  font-size: 1.7rem;
+  font-family: var(--fuentePrimaria);
+}
 .input {    
   padding: 0 5rem;
   padding-left: 3rem;    
@@ -20,53 +24,68 @@
   height: 1rem;
 }
 .botones{
-  margin-top: 2rem;
+  margin-top: 1rem;
+}
+.buttonRegistrate{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.buttonRegistrate:hover{
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0. 8 ease-in;
 }
 
 .button {
-  position: relative;
-  overflow: hidden;
-  height: 2.5rem;
-  padding: 0 2rem;
-  border-radius: 1.5rem;
-  background: #3d3a4e;
-  background-size: 400%;
-  color: #fff;
-  border: none;
-  font-family: var(--fuenteGenerica);
-  font-weight: bold;
+  align-items: center;
+  appearance: none;
+  background-color: #EEF2FF;
+  border-radius: 8px;
+  border-width: 2px;
+  border-color: #536DFE;
+  box-shadow: rgba(83, 109, 254, 0.2) 0 2px 4px, rgba(83, 109, 254, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #536DFE;
   cursor: pointer;
-}
-
-.button:hover::before {
-  transform: scaleX(1);
-}
-
-.button-content {
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 3rem;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  /* margin: 0 auto; */
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  margin-bottom: 1rem;
   position: relative;
-  z-index: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 20px;
 }
 
-.button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  width: 100%;
-  height: inherit;
-  border-radius: inherit;
-  background: linear-gradient(
-    82.3deg,
-    rgb(43, 87, 182) 10.8%,
-    rgb(68, 236, 211) 94.3%
-  );
-  transition: all 0.475s;
+.button:focus {
+  outline: none;
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(83, 109, 254, 0.4) 0 2px 4px, rgba(83, 109, 254, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button:hover {
+  box-shadow: rgba(83, 109, 254, 0.3) 0 4px 8px, rgba(83, 109, 254, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
 }
 .button2 {
   position: relative;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   padding: 10px 22px;
   border-radius: 6px;
   border: none;

@@ -8,21 +8,23 @@ export const User = sequelize.define('user', {
         primaryKey: true,
         autoIncrement: true
     },
-    nombres:{
+    nombre:{
         type: DataTypes.STRING,
         allowNull: false
     }, 
-    apellidos:{
+    apellido:{
         type: DataTypes.STRING,
         allowNull: false
     }, 
     fechaNacimiento: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     sexo: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'Otro'
     },
     correo: {
         type: DataTypes.STRING,
@@ -40,48 +42,57 @@ export const User = sequelize.define('user', {
     },
     imgPerfil: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: ''
     },
     fechaRegistro: {
         type: DataTypes.DATE,
-        allowNull: false
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     cuentasSeguidas: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     seguidores: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     publicaciones: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     foros: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     solicitudes: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     reportes: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     tipoUsuario: {
         type: DataTypes.TINYINT,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     modoOscuro: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
     },
     notificaciones: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
     },
-
 
 })

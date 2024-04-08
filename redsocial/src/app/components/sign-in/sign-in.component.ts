@@ -5,57 +5,54 @@ import { BtnRegresarComponent } from '../btn-regresar/btn-regresar.component';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TituloComponent } from '../titulo/titulo.component';
 import { EnviarComponent } from '../enviar/enviar.component';
-import { ToastrService } from 'ngx-toastr';
 import {  MatSnackBar,  MatSnackBarHorizontalPosition,  MatSnackBarVerticalPosition,} from '@angular/material/snack-bar';
 import { MatError } from '@angular/material/form-field';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { SpinnerComponent } from '../../shared/spinner/spinner.component';
+import { ErrorService } from '../../services/error.service';
+
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports:[FooterComponent, RouterModule, BtnRegresarComponent, FormsModule, TituloComponent, EnviarComponent, ReactiveFormsModule, MatError,CommonModule],
+  imports:[FooterComponent, RouterModule, BtnRegresarComponent, FormsModule, TituloComponent, EnviarComponent, ReactiveFormsModule, MatError,CommonModule, HttpClientModule, SpinnerComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
 export class SignInComponent {
 
-  signInForm: FormGroup;
+  nombre: string = '';
+  apellido: string = '';
+  correo: string = '';
+  nombreUsuario: string = ''
+  password: string = '';
+  confirmPassword: string = '';  
 
-  constructor(private router: Router, private fb: FormBuilder, private sb: MatSnackBar){
+  signInForm: FormGroup;
+  isFormSubmitted:boolean = false;
+  loading: boolean = false;
+
+  constructor(private router: Router, private fb: FormBuilder, private sb: MatSnackBar, private user:UserService, private error: ErrorService){
     this.signInForm = new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.minLength(2),Validators.maxLength(50)]),
       apellido: new FormControl('',[Validators.required, Validators.minLength(2),Validators.maxLength(50)]),
-      fechaNac: new FormControl('',Validators.required),
-      sexo: new FormControl('',Validators.required),
       correo: new FormControl('',[Validators.required, Validators.email]),
-      username: new FormControl('',[Validators.required, Validators.minLength(8)]),
+      nombreUsuario: new FormControl('',[Validators.required, Validators.minLength(8)]),
       password: new FormControl('',[Validators.required, Validators.minLength(8)]),
       confirmPassword: new FormControl('',[Validators.required, Validators.minLength(8)]),
-    })
+    })    
   }
-
-
-
-
-  // registro = new FormGroup({
-  //   nombre: new FormControl('',[Validators.required, Validators.minLength(2),Validators.maxLength(50)]),
-  //   apellido: new FormControl('',[Validators.required, Validators.minLength(2),Validators.maxLength(50)]),
-  //   fechaNac: new FormControl('',Validators.required),
-  //   sexo: new FormControl('',Validators.required),
-  //   correo: new FormControl('',[Validators.required, Validators.email]),
-  //   username: new FormControl('',[Validators.required, Validators.minLength(8)]),
-  //   password: new FormControl('',[Validators.required, Validators.minLength(8)]),
-  //   confrimPassword: new FormControl('',[Validators.required, Validators.minLength(8)]),
-  // });
-
-  public sexo: string = '';
+  passwordsCoinciden: boolean = false; 
   passwordsMatch: boolean = false;
   
   action: string = 'Cerrar'; 
   onSubmit() {
-    if (this.registro.get('password')?.value !== this.registro.get('confirmPassword')?.value) {
+    this.isFormSubmitted = true
+    // Se valida que las contrasenas sean iguales
+    if (this.signInForm.get('password')?.value !== this.signInForm.get('confirmPassword')?.value) {
       this.sb.open('Las contraseñas no coinciden', this.action, {
         duration: 5000,        
         horizontalPosition: this.horizontalPosition,
@@ -64,61 +61,74 @@ export class SignInComponent {
       });
       return; // Detener el envío del formulario si las contraseñas no coinciden
     }
-
-    // Realiza la inserción en la base de datos utilizando tu servicio
-    // this.user.signIn(this.registro.).subscribe(
-    //   (respuesta) => {
-    //     // La inserción fue exitosa, mostrar un mensaje de éxito
-    //     this.sb.open('Datos agregados correctamente a la base de datos', 'Cerrar', { duration: 3000 });
-    //     console.log('Datos agregados correctamente a la base de datos:', respuesta);
-    //   },
-    //   (error) => {
-    //     // Ocurrió un error al insertar los datos, mostrar un mensaje de error
-    //     this.sb.open('Error al agregar datos a la base de datos', 'Cerrar', { duration: 3000 });
-    //     console.error('Error al agregar datos a la base de datos:', error);
-    //   }
-    // );
-
-
-
-
-
-
-
-
-    if (this.registro.valid) {
-      // Realiza la acción correspondiente al enviar el formulario
-      console.log('Formulario válido');
-    } else {
-      // Si el formulario no es válido, muestra el Snackbar
+    if(this.nombre == '' || this.apellido == '' || this.correo == '' || this.nombreUsuario == '' || this.password == '' || this.confirmPassword == ''){
       this.sb.open('Todos los campos son obligatorios', this.action, {
         duration: 5000,        
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
         panelClass: ['notifError'],  
       });
+      return;
+    } 
+
+    const user: User = {
+      nombre: this.nombre,
+      apellido: this.apellido,
+      correo: this.correo,
+      nombreUsuario: this.nombreUsuario,
+      password: this.password
     }
+    // console.log(user)
+    
+    this.loading = true;
+    this.user.signIn(user).subscribe({
+      next: (v) => {
+        this.loading = false;
+        this.sb.open(`Usuario ${user.nombreUsuario} registrado con éxito!`, this.action, {
+          duration: 5000,        
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          panelClass: ['notifExito'],  
+        });
+        this.router.navigate(['/login']);
+                
+      },
+      error: (e: HttpErrorResponse) => {
+        this.loading = false;
+        this.error.msgError(e)       
+      },
+      complete: () => console.info('complete') 
+    })
+
+    
+
+
+    
+    // this.user.signIn(user).subscribe(data => {
+    //   // console.log('Exito')
+    //   this.loading = false;
+    //   this.sb.open(`Usuario ${user.nombreUsuario} registrado con éxito!`, this.action, {
+    //     duration: 5000,        
+    //     horizontalPosition: this.horizontalPosition,
+    //     verticalPosition: this.verticalPosition,
+    //     panelClass: ['notifExito'],  
+    //   });
+    //   this.router.navigate(['/login']);
+    // }, (event: HttpErrorResponse) => {
+    //   this.loading = false;
+    //   this.sb.open(event.error.msg, this.action, {
+    //     duration: 5000,        
+    //     horizontalPosition: this.horizontalPosition,
+    //     verticalPosition: this.verticalPosition,
+    //     panelClass: ['notifError'],  
+    //   });
+    //   this.loading= false
+    // });
+    
     
   }
 
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-
-    if (password?.value !== confirmPassword?.value) {
-      confirmPassword?.setErrors({ mismatch: true });
-    } else {
-      confirmPassword?.setErrors(null);
-    }
-  }
-
-  sendMail(){
-    console.log("Correo enviado");
-  }
-
-  tologin(){
-    this.router.navigate(['/login']);
-  }
+  
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
