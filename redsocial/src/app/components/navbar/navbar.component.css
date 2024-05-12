@@ -1,22 +1,15 @@
 .navbar{   
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%; 
-    /* height: 5.5rem; */
     background: #232526;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
-
     z-index: 1000;
-    /* z-index: 1; */
-    /* margin-bottom: ; */
-    
-
 }
 .navbar-toggler{
     margin-right: 1rem;
 }
-
 .navbar-collapse{
     flex-direction: row;
     justify-content: space-between;
@@ -25,7 +18,7 @@
     transition: max-height 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
 }
 .logo{
-    width: 10%;
+    width: 8%;
     filter: invert(100%);
     margin: 0 1rem 0 1rem;
 }
@@ -67,10 +60,10 @@
     margin: 0.8rem 1rem 0 1rem;
 }
 .navbar-toggler {
-    display: none;
+    display: block;
 }
 
-@media(min-width: 600px){
+@media(min-width: 520px){
     .titulo-navbar{
         font-size: 1.5rem;
     }   
@@ -99,17 +92,32 @@
         line-height: 0.2rem;
     } 
 }
-@media(min-width: 1000px){
+@media(min-width: 990px){
     .navbar{
-        height: 5rem;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
     }
+    .navbar-toggler {
+        display: none;
+      }
+    .navbar-collapse {
+        display: none;
+      }
+      
+      .navbar-collapse.show {
+        display: block;
+      }
     .logo{
         margin: 0;
-        width: 3.5%;
+        width: 2.5%;
     }
     .logo:hover{
         cursor: pointer;
-    }
+    }.titulo-navbar{
+        font-size: 1rem;
+        margin-bottom: 0;
+    }  
     .iconos{
         width: 45%;
         flex-direction: row;
@@ -140,19 +148,3 @@
     }
 }
   
-@media (max-width: 991px) {
-    .navbar-toggler {
-      display: block;
-    }
-    
-    .navbar-collapse {
-      display: none;
-    }
-    
-    .navbar-collapse.show {
-      display: block;
-    }
-    
-   
-}
-

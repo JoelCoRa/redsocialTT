@@ -9,11 +9,10 @@ import { MatError } from '@angular/material/form-field';
 import { UserService } from '../../services/user.service';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { User } from '../../interfaces/user';
-import { UserLogin } from '../../interfaces/userLogin';
+import { UserLogin } from '../../interfaces/user';
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
 import { ErrorService } from '../../services/error.service';
-
-
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +24,7 @@ import { ErrorService } from '../../services/error.service';
 export class LoginComponent {
   nombreUsuario: string = '';
   password: string = '';
+  idUser: string= ''
   loading: boolean = false;
 
   constructor(private router: Router, private sb: MatSnackBar, private user:UserService, private error: ErrorService ){ }
@@ -35,10 +35,9 @@ export class LoginComponent {
   torecPassword(){
     this.router.navigate(['/recpassword']);
   }
-
-  action: string = 'Cerrar'; 
-  login(){
-   
+  action: string = 'Cerrar';
+  
+  login(){   
     //Se valida que el usuario ingrese datos
     if(this.nombreUsuario == '' || this.password == ''){
       this.sb.open('Ingresa datos por favor', this.action, {
@@ -48,7 +47,6 @@ export class LoginComponent {
         panelClass: ['notifError'],  
       });
     } 
-
     // Se crea el objeto
     const user: UserLogin = {
       nombreUsuario: this.nombreUsuario,
@@ -57,17 +55,30 @@ export class LoginComponent {
     this.loading = true;
     this.user.login(user).subscribe({
        next: (token) => {
-        this.loading = false;
+        // console.log(user)
         localStorage.setItem('token', token);
         this.router.navigate(['/inicio']);
-        // console.log(token)
        },
        error: (e: HttpErrorResponse) =>{
-        this.loading = false;
-        this.error.msgError(e)       
+         this.error.msgError(e)       
+         this.loading = false;
 
        }
     })
+  }
+  getUserId(): string | null{
+    const token = localStorage.getItem('token')
+    if (token) {
+      try {
+        const decodedToken: any = jwtDecode(token);
+        console.log(decodedToken.id)
+        return decodedToken.id;
+      } catch (error) {
+        console.error('Error decodificando el token:', error);
+        return null;
+      }
+    }
+    return null;
   }
   
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';

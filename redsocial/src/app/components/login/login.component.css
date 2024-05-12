@@ -3,6 +3,9 @@
     align-self: center;
     width: 50%;
 } 
+.card-container{
+  margin-bottom: 15rem;
+}
 .card-title{
   font-size: 1.7rem;
   font-family: var(--fuentePrimaria);
@@ -177,12 +180,14 @@
   }
 }
 
-@media(min-width: 400px){
+
+@media(min-width: 300px){
   .container{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 5%;
+    overflow: hidden;
   }
   .card-container{
     align-items: center;

@@ -16,5 +16,12 @@ import { TituloSeccionComponent } from '../../titulo-seccion/titulo-seccion.comp
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
+  correoItzel: string = 'correo@correo.com';
+  numItzel: string = '55 5555 5555';
+  numJoel: string = '55 5555 5555';
+  correoJoel: string = 'correo@correo.com';
+  correoMaribel: string = 'correo@correo.com';
+  numMaribel: string = '55 5555 5555';
+
 
 }

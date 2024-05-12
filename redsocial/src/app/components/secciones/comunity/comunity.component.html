@@ -2,19 +2,40 @@
 
 <app-sidebar>
   <div class="contenedor">
+
     <app-titulo-seccion [title]="'Comunidad'"></app-titulo-seccion>
-  <mat-card class="tarjeta">
-    <mat-card-header>
-      <mat-card-title>Actions Buttons</mat-card-title>
-      <mat-card-subtitle>End</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions align="end">
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+    <div class="headerComunidad">
+      <p>Busca amigos, organizaciones o cuentas de tu interés</p>
+      <div class="buscar">
+        <app-barrabusqueda placeholderText="Ingresa un nombre de usuario o un userID..." class="barra"></app-barrabusqueda>
+        <div class="btnBuscarCont">
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg> -->
+          <button class=""><span><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg></span>Buscar</button>
+         </div>
+      </div>
+    </div>
+
+    <div *ngIf="numResultados === 0">
+      <app-mensajevacio class="msgVacioTexto" *ngIf="numResultados === 0">¡No hay resultados para tu búsqueda!</app-mensajevacio>
+    </div>
+
+    <div *ngIf="numResultados !== 0" class="contResultados">
+      <app-cardresultado></app-cardresultado>
+      <app-cardresultado></app-cardresultado>
+      <app-cardresultado></app-cardresultado>
+      <app-cardresultado></app-cardresultado>
+    </div>   
+    
+  
   </div>
 </app-sidebar>
 
 
-<app-footer></app-footer>

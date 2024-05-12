@@ -40,5 +40,9 @@ export class NavbarComponent {
       document.body.style.color = this.lightTheme.color;
     }
   }
+  logOut(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 
 }

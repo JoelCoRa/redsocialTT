@@ -1,0 +1,67 @@
+
+
+/* Publicacion */
+.contenedorPublicacion {
+    margin: 1rem;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(237, 237, 237);
+    border: 2px solid #767676;
+    -webkit-box-shadow: 3px 5px 17px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 5px 17px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 5px 17px 0px rgba(0,0,0,0.75);
+}
+.cuerpoPublicacion{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    /* margin: 1rem; */
+}
+.acciones{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 1rem 0 0;
+}
+.accion{
+    margin-bottom: 1rem;
+}
+
+@media(min-width: 900px){
+    .contenedorPublicacion {
+        margin: 1rem;
+        justify-content: space-between;
+        display: flex;
+    }
+    .cuerpoPublicacion{
+        display: flex;
+        flex-direction: column;
+        /* margin: 1rem; */
+    }
+    .acciones{
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 1rem 0 0;
+    }
+    .accion:hover{
+        transform: scale(110%);
+        cursor: pointer;
+        transition: all 0.5 ease-in-out ;
+    }
+    .like:hover{
+        filter: drop-shadow(2px 2px 4px rgba(231, 12, 12, 0.5));
+    }
+    .share:hover{
+        filter: drop-shadow(2px 2px 4px rgba(225, 101, 7, 0.5));
+    }
+    .broken:hover{
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    }
+}
+.fechaPublicacion{
+    color: rgb(151, 151, 151);
+    margin-left: 1rem;
+}
+

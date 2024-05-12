@@ -17,14 +17,14 @@ export const User = sequelize.define('user', {
         allowNull: false
     }, 
     fechaNacimiento: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+        // defaultValue: '2000-01-01'
     },
     sexo: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: 'Otro'
+        // defaultValue: 'Otro'
     },
     correo: {
         type: DataTypes.STRING,
@@ -40,8 +40,12 @@ export const User = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    imgPerfil: {
+    descripcion: {
         type: DataTypes.STRING,
+        allowNull: true
+    },    
+    imgPerfil: {
+        type: DataTypes.TEXT('long'),
         allowNull: true,
         defaultValue: ''
     },
@@ -94,5 +98,4 @@ export const User = sequelize.define('user', {
         allowNull: false,
         defaultValue: false
     },
-
 })

@@ -1,7 +1,17 @@
 
 import express, {Application} from 'express';
+// Rutas
 import routesUser from '../routes/user';
 import routesDashboard from '../routes/dashboard';
+import routesPerfil from '../routes/perfil';
+import routesAdmin from '../routes/administrador';
+import routesAjustes from '../routes/ajustes';
+import routesAyuda from '../routes/ayuda';
+import routesComunidad from '../routes/comunidad';
+import routesContacto from '../routes/contacto';
+import routesForos from '../routes/foros';
+import routesRecursos from '../routes/recursos';
+
 import sequelize from '../db/connection';
 import { User } from './user.model';
 import { Post } from './post.model';
@@ -16,9 +26,10 @@ import cors from 'cors'
     private app: Application;
     private port: string ; 
 
-    constructor(){
+    constructor() {
         this.app = express();
         this.port = process.env.PORT || '3001';
+        // this.ten();
         this.middlewares();
         this.routes();
         this.dbConnect();
@@ -27,20 +38,27 @@ import cors from 'cors'
     listen(){
         this.app.listen(this.port, () => {
             console.log('App running in port ' + this.port)
-        })
+        });
     }
 
     routes(){
-        this.app.use('/api/inicio', routesDashboard);
-        this.app.use('/api/users', routesUser);
+        this.app.use('/api/users', routesUser);        
+        this.app.use('/api/dashboard', routesDashboard);
+        this.app.use('/api/perfil', routesPerfil);
+        this.app.use('/api/admin', routesAdmin);
+        this.app.use('/api/ajustes', routesAjustes);
+        this.app.use('/api/ayuda', routesAyuda);
+        this.app.use('/api/comunidad', routesComunidad);
+        this.app.use('/api/contacto', routesContacto);
+        this.app.use('/api/foros', routesForos);
+        this.app.use('/api/recursos', routesRecursos);
     }
 
     middlewares(){
         // Parseo body
         this.app.use(express.json());
-
         // Cors
-        this.app.use(cors())
+        this.app.use(cors());
     }
     async dbConnect() {
         try {
@@ -58,6 +76,4 @@ import cors from 'cors'
         }
     }
 } 
-
-
 export default Server;

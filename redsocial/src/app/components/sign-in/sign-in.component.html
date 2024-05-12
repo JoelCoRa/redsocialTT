@@ -33,7 +33,7 @@
                       <!-- <div class="campo">
                         <label for="">Fecha de nacimiento <span class="obligatorio">*</span></label>
                         <input class="input" required="" type="date" formControlName="fechaNac" min="2010-01-01" max="2024-01-01" [(ngModel)]="fechaNacimiento">
-                        <div class="text-danger" *ngIf="signInForm.controls['fechaNac'].invalid && (isFormSubmitted || signInForm.controls['fechaNac'].touched || signInForm.controls['fechaNac'].dirty )">
+                        <div class="text- danger" *ngIf="signInForm.controls['fechaNac'].invalid && (isFormSubmitted || signInForm.controls['fechaNac'].touched || signInForm.controls['fechaNac'].dirty )">
                           <span *ngIf="signInForm.controls['fechaNac'].errors?.['required']">Debes seleccionar tu dia de nacimiento.</span>
                         </div>
                       <span class="input-border"></span>
@@ -96,19 +96,21 @@
                         <label for="">Confirma la contraseña<span class="obligatorio">*</span></label>
                         <input class="input" placeholder="Contraseña" required="" type="password" formControlName="confirmPassword" [(ngModel)]="confirmPassword">
                         <span class="input-border"></span>
-
                         <div class="text-danger" *ngIf="signInForm.controls['confirmPassword'].invalid && (isFormSubmitted || signInForm.controls['confirmPassword'].touched)">
                           <span *ngIf="signInForm.controls['confirmPassword'].errors?.['required']">Debes repetir la contraseña</span>
                         </div>
-                      </div> 
+                      </div>                       
+                    </div>
+                    <div class="col-md-12 contCheckbox">
+                      <p class="aviso">Al dar click en Registrar estas aceptando el <span class="txtCheckbox"><a routerLink="/avisodeprivacidad">Aviso de Privacidad</a></span></p>
                       
                     </div>
                   </div>                                   
                 </form>              
               </div>
               <div class="botones">
-                <app-enviar (click)="onSubmit()"></app-enviar>
-                <app-btn-regresar routerLink="/login"></app-btn-regresar>               
+                <app-enviar (click)="onSubmit()" class="btn"></app-enviar>
+                <app-btn-regresar routerLink="/login" class="btn"></app-btn-regresar>               
               </div>  
               <app-spinner *ngIf="loading"></app-spinner>           
             </div>

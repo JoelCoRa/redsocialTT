@@ -1,0 +1,95 @@
+.contenedor{
+    height: 100%;
+    /* overflow: hidden; */
+}
+.contResultados{
+    overflow: hidden;
+}
+.headerComunidad{
+    margin: 1rem;
+}
+.headerComunidad p{
+    font-size: 0.9rem;
+    text-align: center;
+    font-family: var(--fuenteGenerica);
+}
+@media(min-width: 900px){
+    .contenedor{
+        height: 100vh;
+        overflow: hidden;
+    }
+    .headerComunidad p{
+        font-size: 1.2rem;
+    }
+}
+.buscar{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 1rem auto;
+    /* border: 1px solid #000; */
+}
+.buscar .barra{
+    width: 100%;
+}
+.buscar .btnBuscarCont{
+    display: flex;
+    width: 35%;
+    padding: 0.5rem;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-family: var(--fuentePrimaria);
+    font-size: 1rem;
+    margin: 0.5rem auto;
+    border: none;    
+    background: none;
+    background-color: rgb(15, 104, 49);
+    border-radius: 10px;
+    -webkit-box-shadow: 3px 3px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 14px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 14px 0px rgba(0,0,0,0.75);
+    cursor: pointer;
+}
+.buscar .btnBuscarCont button{
+    background: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    border: none;
+}
+.buscar .btnBuscarCont span svg{
+    margin-right: 0.2rem;
+    vertical-align: baseline;
+}
+
+@media(min-width: 600px){
+    .buscar .btnBuscarCont{
+        width: 25%;
+        /* margin-top: 0; */
+        font-size: 1.2rem;
+    } 
+}
+
+
+@media(min-width: 900px){
+    .buscar{
+        flex-direction: row;
+        /* justify-content: space   -around; */
+    }
+    .buscar .btnBuscarCont{
+        width: 20%;
+        margin-top: 0;
+        font-size: 1.2rem;
+    } 
+    .buscar .btnBuscarCont:hover{
+        color: rgb(0, 0, 0);
+        background-color: rgb(44, 216, 110);
+        transform: scale(105%);
+        transition: 0.5s ease-in all;
+        
+    }
+}

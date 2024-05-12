@@ -10,27 +10,34 @@ import { CommonModule } from '@angular/common';
 })
 export class ChatbotComponent {
 
+  mostrarChat = false;
+
+  toggleChat() {
+    this.mostrarChat = !this.mostrarChat;
+  }
+
   isFullSize: boolean = true;
-window: any;
 
 
-
-  
-
-  showPopup: boolean = false;
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    // Detecta cambios en la dimensión de la ventana y actualiza el estado de la ventana emergente según corresponda
-    this.showPopup = window.innerWidth >= 1000;
+  // Mostrar el chat con el btn
+  estaAbiertoElChat: boolean = true;
+  toggleChatBot() {
+    this.estaAbiertoElChat = !this.estaAbiertoElChat;
   }
 
-  openPopup() {
-    this.showPopup = true;
+
+
+  getRandomElement<T>(arr: T[]): T | undefined {
+    if (arr.length === 0) {
+      return undefined; // Handle empty array case
+    }
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
   }
 
-  closePopup() {
-    this.showPopup = false;
-  }
+
+  mensajesChatbot: string[] = ['Este chatbot te ayudará a lo que necesites dentro del portal', 'Hola soy un chatbot a tu servicio'];
+  mensajeChatbot = this.getRandomElement(this.mensajesChatbot);
+
 
 }

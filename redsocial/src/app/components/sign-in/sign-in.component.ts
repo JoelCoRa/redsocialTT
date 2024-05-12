@@ -14,7 +14,6 @@ import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
 import { ErrorService } from '../../services/error.service';
 
-
 @Component({
   selector: 'app-sign-in',
   standalone: true,
@@ -32,8 +31,9 @@ export class SignInComponent {
   confirmPassword: string = '';  
 
   signInForm: FormGroup;
-  isFormSubmitted:boolean = false;
+  isFormSubmitted: boolean = false;
   loading: boolean = false;
+
 
   constructor(private router: Router, private fb: FormBuilder, private sb: MatSnackBar, private user:UserService, private error: ErrorService){
     this.signInForm = new FormGroup({
@@ -47,6 +47,7 @@ export class SignInComponent {
   }
   passwordsCoinciden: boolean = false; 
   passwordsMatch: boolean = false;
+
   
   action: string = 'Cerrar'; 
   onSubmit() {
@@ -61,7 +62,16 @@ export class SignInComponent {
       });
       return; // Detener el envío del formulario si las contraseñas no coinciden
     }
-    if(this.nombre == '' || this.apellido == '' || this.correo == '' || this.nombreUsuario == '' || this.password == '' || this.confirmPassword == ''){
+    // if(this.nombre == '' || this.apellido == '' || this.correo == '' || this.nombreUsuario == '' || this.password == '' || this.confirmPassword == ''){
+    //   this.sb.open('Todos los campos son obligatorios', this.action, {
+    //     duration: 5000,        
+    //     horizontalPosition: this.horizontalPosition,
+    //     verticalPosition: this.verticalPosition,
+    //     panelClass: ['notifError'],  
+    //   });
+    //   return;
+    // } 
+    if(this.signInForm.get('nombre')?.value === '' || this.signInForm.get('apellido')?.value === '' || this.signInForm.get('correo')?.value === '' || this.signInForm.get('password')?.value === '' || this.signInForm.get('confirmPassword')?.value === ''){
       this.sb.open('Todos los campos son obligatorios', this.action, {
         duration: 5000,        
         horizontalPosition: this.horizontalPosition,
@@ -70,7 +80,7 @@ export class SignInComponent {
       });
       return;
     } 
-
+  
     const user: User = {
       nombre: this.nombre,
       apellido: this.apellido,

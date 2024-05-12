@@ -19,8 +19,9 @@ exports.Post = connection_1.default.define('post', {
         allowNull: false
     },
     fechaPublicacion: {
-        type: sequelize_1.DataTypes.DATE,
-        allowNull: false
+        type: sequelize_1.DataTypes.DATEONLY,
+        allowNull: false,
+        defaultValue: connection_1.default.literal('CURRENT_TIMESTAMP')
     },
     likes: {
         type: sequelize_1.DataTypes.INTEGER,

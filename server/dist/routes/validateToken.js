@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const validateToken = (req, res, next) => {
     const headerToken = req.headers['authorization'];
-    console.log("validate token");
+    console.log(headerToken);
     if (headerToken != undefined && headerToken.startsWith('Bearer ')) {
-        // Tiene token
+        // Existe Token
         try {
             const bearerToken = headerToken.slice(7);
             jsonwebtoken_1.default.verify(bearerToken, process.env.SECRET_KEY || 'pepito123');
@@ -22,7 +22,7 @@ const validateToken = (req, res, next) => {
     }
     else {
         res.status(401).json({
-            msg: 'Acceso denegado'
+            msg: "Acceso Denegado"
         });
     }
 };

@@ -1,0 +1,10 @@
+.msgVacio{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.msgVacioImg{
+    width: 20%;
+}

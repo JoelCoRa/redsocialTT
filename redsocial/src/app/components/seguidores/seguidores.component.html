@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+
+<app-sidebar>
+  <div class="contenedor">
+    <app-titulo-seccion [title]="'Perfil'"></app-titulo-seccion>  
+    <div class="cuerpoPerfil">
+      <app-headerperfil></app-headerperfil>      
+      <h5 class="tituloPerfil">Seguidores</h5>
+      <div class="nopublicaciones" *ngIf="numSeguidores === 0">
+        <div class="msgWarning">
+          <img src="../../../../assets/warning.png" alt="warning" class="imgWarning">
+          <p class="textoSinPublicaciones">¡Aun no te sigue nadie!</p>
+        </div>        
+      </div>
+      <div class="contCuentas" *ngIf="numSeguidores !== 0">
+        <app-cuentas-seguidores></app-cuentas-seguidores>
+        <app-cuentas-seguidores></app-cuentas-seguidores>
+      </div>
+      
+    </div>
+  </div>
+  <!-- <app-footer></app-footer> -->
+
+</app-sidebar>
+

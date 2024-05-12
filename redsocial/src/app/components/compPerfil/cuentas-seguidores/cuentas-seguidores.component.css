@@ -1,0 +1,98 @@
+.contenedorCuentas{
+    width: 90%;
+    margin: 1rem auto;
+    padding: 0;
+}
+.cuentas{
+    display: flex;
+    border: 3px solid #000;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+}
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+.nombreCuenta{
+    text-align: center;
+    font-size: 1rem;    
+    font-family: var(--fuenteGenerica);
+    font-weight: bold;
+    margin: 0.5rem;
+}
+.imgCircular{
+    width: 4rem; /* ajusta el ancho y alto según sea necesario */
+    height: 3rem;
+    border-radius: 50%; /* esto hará que los bordes sean redondos */
+    overflow: hidden;
+    margin: 0 1rem;
+}
+.imgPerfil{
+    width: 100%; /* esto asegura que la imagen ocupe todo el espacio dentro del div */
+    height: 100%;
+    object-fit: cover;
+}
+.accionesCuentas{
+    display: flex;  
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-around;
+    text-align: center;
+}
+.contAccion{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: none;
+    border: none;
+}
+.contAccion span{
+    color: #000;
+    width: 3rem;
+    line-height: 0.9;
+    font-size: 0.7rem;
+    font-style: italic;
+    text-wrap: wrap;
+    font-family: var(--fuenteSecundaria);
+}
+
+.accion{
+    margin: 0 auto; 
+    width: 1.5rem;
+}
+@media(min-width: 900px){
+    .cuentas{
+        display: flex;
+        border: 3px solid #000;
+        border-radius: 3px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .imgCircular{
+        width: 5rem; /* ajusta el ancho y alto según sea necesario */
+        height: 5rem;
+        margin: 0 2rem;
+    }
+    .imgPerfil{
+        width: 100%; /* esto asegura que la imagen ocupe todo el espacio dentro del div */
+        height: 100%;
+        object-fit: cover;
+    }
+    .accionesCuentas{
+        flex-direction: column;
+        width: 10%;
+    }
+    .contAccion span{        
+        display: none;
+    }
+    .accion{
+        width: 2rem;
+        margin: 0 1rem;
+    }
+}

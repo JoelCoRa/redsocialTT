@@ -1,9 +1,9 @@
 import { Router } from "express";
 import validateToken from "./validateToken";
-import { getDashboard } from "../controllers/dashboard.controller";
+import { getPostsSeg } from "../controllers/dashboard.controller";
 
 const router = Router();
-router.get('/', validateToken, getDashboard);
+router.get('/postseg', validateToken, getPostsSeg);
 
 
 export default router;

@@ -15,8 +15,9 @@ export const Post = sequelize.define('post', {
         allowNull: false
     }, 
     fechaPublicacion:{
-        type: DataTypes.DATE,
-        allowNull: false
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     likes:{
         type: DataTypes.INTEGER,

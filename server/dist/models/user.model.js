@@ -21,14 +21,14 @@ exports.User = connection_1.default.define('user', {
         allowNull: false
     },
     fechaNacimiento: {
-        type: sequelize_1.DataTypes.DATE,
-        allowNull: false,
-        defaultValue: connection_1.default.literal('CURRENT_TIMESTAMP')
+        type: sequelize_1.DataTypes.DATEONLY,
+        allowNull: true,
+        // defaultValue: '2000-01-01'
     },
     sexo: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
-        defaultValue: 'Otro'
+        // defaultValue: 'Otro'
     },
     correo: {
         type: sequelize_1.DataTypes.STRING,
@@ -44,8 +44,12 @@ exports.User = connection_1.default.define('user', {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false
     },
-    imgPerfil: {
+    descripcion: {
         type: sequelize_1.DataTypes.STRING,
+        allowNull: true
+    },
+    imgPerfil: {
+        type: sequelize_1.DataTypes.TEXT('long'),
         allowNull: true,
         defaultValue: ''
     },

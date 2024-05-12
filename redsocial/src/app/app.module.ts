@@ -7,6 +7,8 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+// import { addTokenInterceptor } from "./utils/add-token.interceptor";
 
 
 @NgModule({
@@ -17,9 +19,10 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         ReactiveFormsModule,
         CommonModule,
         MatSnackBarModule,
-
     ],
-    providers:[],
+    providers:[
+        // { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true }
+    ],
     bootstrap:[]
 
 })
