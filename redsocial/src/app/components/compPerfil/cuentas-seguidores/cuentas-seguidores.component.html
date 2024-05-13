@@ -1,14 +1,14 @@
-<mat-card class="contenedorCuentas">
+<mat-card class="contenedorCuentas" *ngFor="let item of cuentasSeguidores">
     <mat-card-content class="cuentas">
         <div class="info">
-            <div class="imgCircular">
-                <img src="../../../../assets/pato.jpg" alt="" class="imgPerfil">
-            </div>            
-            <p class="nombreCuenta">{{cuenta}}</p>
+            <img src="../../../../assets/avatars/3.jpg" alt="" class="imgPerfil">
+          
+            <p class="nombreCuenta">{{item.nombreUserSeguidor}}</p>
         </div>
         
         <div class="accionesCuentas">
-            <button class="contAccion">
+            <button class="contAccion tooltip-container">
+                <span class="tooltip">Dejar de Seguir</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-rounded-minus accion" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round" *ngIf="seguido">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M9 12h6" />

@@ -12,12 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = exports.loginUser = exports.newUser = void 0;
+exports.loginUser = exports.newUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const user_model_1 = require("../models/user.model");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const sequelize_1 = require("sequelize");
-const connection_1 = __importDefault(require("../db/connection"));
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombre, apellido, fechaNacimiento, sexo, correo, nombreUsuario, password, imgPerfil, fechaRegistro, cuentasSeguidas, seguidores, publicaciones, foros, solicitudes, reportes, tipoUsuario, modoOscuro, notificaciones, descripcion } = req.body;
     const hashedPassword = yield bcrypt_1.default.hash(password, 10);
@@ -66,10 +64,6 @@ exports.newUser = newUser;
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombreUsuario, password } = req.body;
     console.log(nombreUsuario);
-    // const userid = await sequelize.query('SELECT id FROM users where nombreUsuario = ?', {type: QueryTypes.SELECT, replacements: [nombreUsuario]});
-    // console.log(userid[0])
-    // const idUser = userid    
-    // Se valida que el usuario exista en al BD
     const user = yield user_model_1.User.findOne({ where: { nombreUsuario: nombreUsuario } });
     if (!user) {
         return res.status(400).json({
@@ -92,12 +86,3 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json(token);
 });
 exports.loginUser = loginUser;
-const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { idUser } = req.params;
-    console.log(idUser);
-    // const prueba :string = 'Batman5678'
-    const user = yield connection_1.default.query('SELECT users.id, users.nombre, users.apellido, users.nombreUsuario, users.descripcion, users.cuentasSeguidas, users.seguidores, COUNT(*) AS totalPosts FROM users INNER JOIN posts ON users.id=posts.userId Where users.id = ?', { type: sequelize_1.QueryTypes.SELECT, replacements: [idUser] });
-    // console.log(user);
-    res.json(user);
-});
-exports.getUser = getUser;

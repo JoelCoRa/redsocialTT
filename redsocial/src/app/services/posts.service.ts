@@ -23,15 +23,16 @@ export class PostsService {
   }
 
   // Se consume en el dashboard
-  getPostSeg(): Observable<PostSeg[]> {    
-    return this.http.get<PostSeg[]>(`${this.myAppUrl}api/dashboard/postseg`); 
-  }
-
-
+  getPostSeg(id:number): Observable<PostSeg[]> {    
+    return this.http.get<PostSeg[]>(`${this.myAppUrl}api/dashboard/postseg/${id}`); 
+  }  
   // Se consume en perfil
   getPostPropio(id: number): Observable<PostPropio[]>{   
-    return this.http.get<PostPropio[]>(`${this.myAppUrl}api/perfil/postpropio/`); 
-    // return this.http.get<PostPropio[]>(`${this.myAppUrl}${this.myApiUrl}/postpropio`);
+    return this.http.get<PostPropio[]>(`${this.myAppUrl}api/perfil/postpropio/${id}`); 
+  }
+  // Se consume en perfil
+  getTotalPosts(id: number): Observable<number>{
+    return this.http.get<number>(`${this.myAppUrl}api/perfil/getuser/totalposts/${id}`);
   }
 
 }

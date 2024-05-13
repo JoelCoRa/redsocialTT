@@ -31,12 +31,12 @@ import { User, UserPerfil } from '../../../interfaces/user';
 })
 export class ProfileComponent {
 
-  nombreUsuario: string = "Usuario";
+  nombreUsuario: string = "";
   idUsuario: string = '';
   numPublicaciones: number = 0;
   contenidoPublicacion: string = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, iure! Accusamus placeat voluptatibus nemo quam magnam nulla ullam impedit magni harum, eius, eum neque in consequuntur reiciendis odit, debitis officiis."
   fechaPublicacion: string = "14 de febrero de 2024";
-  constructor(private router: Router, private posts: PostsService, private user: UserService) { }  
+  constructor(private router: Router, private posts: PostsService, private user2: UserService) { }  
 
   toPerfil(){
     this.router.navigate(['/perfil']);
@@ -48,20 +48,27 @@ export class ProfileComponent {
     this.router.navigate(['/perfil/seguidores']);
   }
 
+  usuario!: UserPerfil;
   listPostPropio: PostPropio[] = []
   ngOnInit(): void {
+    this.getUser();
     this.getPostPropio();
   }
   getPostPropio(){
-    const userId = Number(this.user.getUserId());
-    console.log(userId)
+    const userId = Number(this.user2.getUserId());    
     this.posts.getPostPropio(userId).subscribe(data => {
       this.listPostPropio = data;
       this.numPublicaciones = this.listPostPropio.length;
       console.log(this.listPostPropio);
-      this.nombreUsuario = this.listPostPropio[0].nombreUsuario;
-      this.idUsuario = `000 ${this.listPostPropio[0].idUser.toString()}`;
-      this.contenidoPublicacion = this.listPostPropio[0].contenido
+     // this.idUsuario = `${this.listPostPropio[0].id.toString()}`;
+      // this.contenidoPublicacion = this.listPostPropio[0].contenido
+    })
+  }
+  getUser(){
+    const userId = Number(this.user2.getUserId());    
+    this.user2.getUser(userId).subscribe(data => {
+      this.usuario = data;
+      this.nombreUsuario = this.usuario.nombreUsuario
     })
   }
 

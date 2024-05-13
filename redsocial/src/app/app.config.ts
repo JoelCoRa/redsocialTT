@@ -12,7 +12,7 @@ import { addTokenInterceptor } from './utils/add-token.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
-    provideClientHydration(),
+    // provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([addTokenInterceptor]), withFetch())
   ]

@@ -27,11 +27,11 @@ exports.Post = connection_1.default.define('post', {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     },
-    comentarios: {
+    dislikes: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     },
-    reportes: {
+    comentarios: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     },

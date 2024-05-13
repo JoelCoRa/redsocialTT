@@ -334,11 +334,12 @@ input::placeholder{
 
 /* Img de perfil circular */
 .imgCircular{
-    width: 4rem; /* ajusta el ancho y alto según sea necesario */
-    height: 3rem;
+    width: 90%; /* ajusta el ancho y alto según sea necesario */
+    height: 90%;
     border-radius: 50%; /* esto hará que los bordes sean redondos */
     overflow: hidden;
-    margin: 0 1rem;
+    margin: 0 1rem 0 0.5rem;
+    /* margin-right: 2rem; */
 }
 .imgPerfil{
     width: 100%; /* esto asegura que la imagen ocupe todo el espacio dentro del div */
@@ -346,11 +347,6 @@ input::placeholder{
     object-fit: cover;
 }
 @media(min-width: 900px){
-    .imgCircular{
-        width: 5rem; /* ajusta el ancho y alto según sea necesario */
-        height: 5rem;
-        margin: 0 2rem;
-    }
     .imgPerfil{
         width: 100%; /* esto asegura que la imagen ocupe todo el espacio dentro del div */
         height: 100%;

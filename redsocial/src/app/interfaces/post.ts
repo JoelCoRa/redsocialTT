@@ -11,12 +11,13 @@ export interface PostSeg{
 }
 
 export interface PostPropio{
-    idUser: number,
     idPost: number,
     contenido: string,
     fechaPublicacion: string,
     likes: number,
     dislikes: number,
-    nombreUsuario: string,
     // imgUsuario: string
+}
+export interface TotalPosts{
+    totalPosts: number
 }

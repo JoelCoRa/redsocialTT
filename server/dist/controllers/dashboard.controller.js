@@ -16,10 +16,8 @@ exports.getPostsSeg = void 0;
 const connection_1 = __importDefault(require("../db/connection"));
 const sequelize_1 = require("sequelize");
 const getPostsSeg = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // console.log(token);
-    const listPostsSeguidos = yield connection_1.default.query('SELECT seguidosseguidores.userIdSeguido AS UsuarioSeguido, posts.id AS idPost, posts.contenido, posts.fechaPublicacion, posts.likes, posts.dislikes, posts.userId AS UsuarioSeguidor, seguidosseguidores.nombreUserSeguido, seguidosseguidores.nombreUserSeguidor FROM POSTS INNER JOIN seguidosseguidores ON posts.userId=seguidosseguidores.userIdSeguidor ORDER BY posts.fechaPublicacion DESC;', { type: sequelize_1.QueryTypes.SELECT });
-    // const listPostsSeguidos = await sequelize.query('SELECT posts.id AS idPost, posts.contenido, posts.fechaPublicacion, posts.likes, posts.comentarios, posts.reportes, users.nombreUsuario FROM POSTS INNER JOIN users ON posts.userId = users.id WHERE users.id = 1;', {type: QueryTypes.SELECT});
-    // console.log(JSON.stringify(listPostsSeguidos[0]))
+    const { id } = req.params;
+    const listPostsSeguidos = yield connection_1.default.query('SELECT * FROM posts inner join seguidosseguidores on posts.userId = seguidosseguidores.userIdSeguidor where seguidosseguidores.userIdSeguido = ?;', { type: sequelize_1.QueryTypes.SELECT, replacements: [id] });
     res.json(listPostsSeguidos);
 });
 exports.getPostsSeg = getPostsSeg;

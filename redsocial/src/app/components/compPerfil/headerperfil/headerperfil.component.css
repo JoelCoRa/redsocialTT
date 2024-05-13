@@ -16,9 +16,9 @@
     /* padding: 0; */
 }
 .avatarPerfil{
-    width: 15rem;
+    width: 30%;
     border-radius: 50%;
-    height: 10rem;
+    height: 30%;
     -webkit-box-shadow: 3px 2px 14px -1px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 2px 14px -1px rgba(0,0,0,0.75);
     box-shadow: 3px 2px 14px -1px rgba(0,0,0,0.75);
@@ -31,9 +31,9 @@
         /* justify-content: flex-start; */
     }   
     .avatarPerfil{
-        width: 15rem;
+        width: 70%;
         border-radius: 50%;
-        height: 15rem;
+        height: 70%;
     }
     .contImg{
         width: 40%;
@@ -217,7 +217,7 @@
         padding: 0.5rem;
         font-size: 1rem;
     }
-    .btnMenuPerfil span{
+    .btnMenuPerfil resp{
         padding: 0.4rem;
     }
     .nombre-id{

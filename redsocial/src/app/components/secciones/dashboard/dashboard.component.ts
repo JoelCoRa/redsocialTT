@@ -65,6 +65,7 @@ export class DashboardComponent {
   fechasPublicacion: string = ''
 
   getUserId(): string | null{
+    
     const token = localStorage.getItem('token')
     if (token) {
       try {
@@ -77,34 +78,21 @@ export class DashboardComponent {
       }
     }
     return null;
-  }
-  
+  }  
 
   getPostSeg() {    
-    this.posts.getPostSeg().subscribe(data => {    
+    const userId = Number(this.user.getUserId()); 
+    this.posts.getPostSeg(userId).subscribe(data => {    
       this.listPostSeg = data;
-      this.usuarioPropio = this.listPostSeg[0].nombreUserSeguido;
-      for(let i=0; i<this.listPostSeg.length;i++){
-        // console.log(this.listPostSeg[i].fechaPublicacion);
-        const fechaSQL = new Date(this.listPostSeg[i].fechaPublicacion);
-        const year = fechaSQL.getFullYear();
-        const month = fechaSQL.getMonth() + 1; // +1 porque getMonth() devuelve valores de 0 a 11
-        const day = fechaSQL.getDate();
+      console.log(this.listPostSeg)
+      // this.usuarioPropio = this.listPostSeg[0].nombreUserSeguido;
 
-        const nuevaFecha = `${day}/${month}/${year}`
-        this.fechasPublicacion = nuevaFecha
-
-        // console.log('Año:', year);
-        // console.log('Mes:', month);
-        // console.log('Día:', day);
-        this.fechaPublicacion = this.listPostSeg[i].fechaPublicacion
-      }
-      // console.log(data[0].fechaPublicacion)
-      // console.log(this.listPostSeg);
-      this.numPublicaciones = this.listPostSeg.length
-      if(this.listPostSeg.length === 0){
-        this.numPublicaciones = 0;
-      }
+      // // console.log(data[0].fechaPublicacion)
+      // // console.log(this.listPostSeg);
+      // this.numPublicaciones = this.listPostSeg.length
+      // if(this.listPostSeg.length === 0){
+      //   this.numPublicaciones = 0;
+      // }
     });
   }
 

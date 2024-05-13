@@ -5,33 +5,37 @@ import { User, UserPerfil } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { UserLogin } from '../interfaces/user';
 import { jwtDecode } from "jwt-decode";
+import { TotalPosts } from '../interfaces/post';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private myAppURL: string; 
+  private myAppUrl: string; 
   private myApiURL: string;
   
 
   constructor(private http: HttpClient) {
-    this.myAppURL = environment.endpoint;
+    this.myAppUrl = environment.endpoint;
     this.myApiURL = 'api/users';
   }
-
+  // Se consume en el signin
   signIn(user: User): Observable<any>{
-    return this.http.post(`${this.myAppURL}${this.myApiURL}`, user)
+    return this.http.post(`${this.myAppUrl}${this.myApiURL}`, user)
+  }
+    // Se consume en el login
+  login(user: UserLogin):Observable<string>{
+    return this.http.post<string>(`${this.myAppUrl}${this.myApiURL}/login`, user)
   }
 
-  login(user: UserLogin):Observable<string>{
-    return this.http.post<string>(`${this.myAppURL}${this.myApiURL}/login`, user)
+    // Se consume en el perfil
+  getUser(id: number): Observable<UserPerfil> {
+    return this.http.get<any>(`${this.myAppUrl}api/perfil/getuser/${id}`);
   }
-  
-  getUsername(): Observable<string> {
-    return this.http.get<any>(`${this.myAppURL}${this.myApiURL}`);
-  }
-  getUser(id: number): Observable<UserPerfil[]> {
-    return this.http.get<any>(`${this.myAppURL}${this.myApiURL}/getuser/`);
+
+  // Se consume en el perfil
+  getTotalPosts(id: number): Observable<number>{
+    return this.http.get<number>(`${this.myAppUrl}api/perfil/getuser/totalposts/${id}`);
   }
   getToken(): string | null{
     const token = localStorage.getItem('token')

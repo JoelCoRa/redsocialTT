@@ -23,11 +23,11 @@ export const Post = sequelize.define('post', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    comentarios:{
+    dislikes:{
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    reportes:{
+    comentarios:{
         type: DataTypes.INTEGER,
         allowNull: false
     },
