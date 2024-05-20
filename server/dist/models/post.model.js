@@ -16,7 +16,8 @@ exports.Post = connection_1.default.define('post', {
     },
     contenido: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: ""
     },
     fechaPublicacion: {
         type: sequelize_1.DataTypes.DATEONLY,
@@ -25,15 +26,18 @@ exports.Post = connection_1.default.define('post', {
     },
     likes: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     dislikes: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     comentarios: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
 });
 user_model_1.User.hasMany(exports.Post); // Un usuario puede tener muchos posts

@@ -10,24 +10,29 @@ import { PublicacionpropiaComponent } from "../compPerfil/publicacionpropia/publ
 import { CommonModule } from '@angular/common';
 import { CuentasComponent } from "../compPerfil/cuentas/cuentas.component";
 import { CuentasSeguidoresComponent } from "../compPerfil/cuentas-seguidores/cuentas-seguidores.component";
+import { MensajevacioComponent } from "../mensajevacio/mensajevacio.component";
+import { UserService } from '../../services/user.service';
+import { CuentasService } from '../../services/cuentas.service';
 
 @Component({
     selector: 'app-seguidores',
     standalone: true,
     templateUrl: './seguidores.component.html',
     styleUrl: './seguidores.component.css',
-    imports: [MatButtonToggleModule, TituloSeccionComponent, NavbarComponent, SidebarComponent, FooterComponent, HeaderperfilComponent, PublicacionpropiaComponent, CommonModule, CuentasComponent, CuentasSeguidoresComponent]
+    imports: [MatButtonToggleModule, TituloSeccionComponent, NavbarComponent, SidebarComponent, FooterComponent, HeaderperfilComponent, PublicacionpropiaComponent, CommonModule, CuentasComponent, CuentasSeguidoresComponent, MensajevacioComponent]
 })
 export class SeguidoresComponent {
   nombreUsuario: string = "Usuario";
   idUsuario: string = "0000000";
 
-  numSeguidores: number = 1;
+  numSeguidores: number = 0;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private user: UserService, private cuentas: CuentasService) { }
 
-  
+  ngOnInit(){
+    this.countSeguidores();
+  }  
 
   toPerfil(){
     this.router.navigate(['/perfil']);
@@ -38,5 +43,11 @@ export class SeguidoresComponent {
   }
   toSeguidores(){
     this.router.navigate(['/perfil/seguidores']);
+  }
+  countSeguidores(){
+    const idUser = Number(this.user.getUserId());
+    this.cuentas.countSeguidores(idUser).subscribe(data =>{
+      this.numSeguidores = data      
+    });
   }
 }

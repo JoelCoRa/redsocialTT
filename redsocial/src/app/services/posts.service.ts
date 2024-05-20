@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse, HttpHandler, HttpHeaders, HttpRequest } 
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
-import { PostPropio, PostSeg } from '../interfaces/post';
+import { PostDisliked, PostLiked, PostPropio, PostSeg, postCreado } from '../interfaces/post';
 import { Token } from '@angular/compiler';
 import { Router, RouterModule } from '@angular/router';
 import { ErrorService } from './error.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import {jwtDecode} from "jwt-decode";
+import { LikesUser } from '../interfaces/likes';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,12 @@ export class PostsService {
   // Se consume en perfil
   getTotalPosts(id: number): Observable<number>{
     return this.http.get<number>(`${this.myAppUrl}api/perfil/getuser/totalposts/${id}`);
+  }
+  createPost(post: postCreado): Observable<any>{
+    return this.http.post(`${this.myAppUrl}api/perfil/createpost`, post);
+  }
+  deletePost(postId: number): Observable<any>{
+    return this.http.delete(`${this.myAppUrl}api/perfil/deletepost/${postId}`);
   }
 
 }

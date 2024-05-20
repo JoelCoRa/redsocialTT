@@ -19,20 +19,32 @@ exports.Foro = connection_1.default.define('forum', {
     },
     ultimaActividad: {
         type: sequelize_1.DataTypes.DATE,
+        allowNull: true
+    },
+    contenido: {
+        type: sequelize_1.DataTypes.DATE,
         allowNull: false
     },
     replicas: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     likes: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     reportes: {
         type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true
+    },
+    etiqueta: {
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false
     },
+    anonimo: {
+        type: sequelize_1.DataTypes.BOOLEAN,
+        allowNull: false
+    }
 });
 user_model_1.User.hasMany(exports.Foro); // Un usuario puede tener muchos foros
 exports.Foro.belongsTo(user_model_1.User);

@@ -6,13 +6,12 @@
     <div class="cuerpoPerfil">
       <app-headerperfil></app-headerperfil>      
       <h5 class="tituloPerfil">Cuentas que sigues</h5>
-      <div class="nopublicaciones" *ngIf="numSeguidos === 0">
-        <div class="msgWarning">
-          <img src="../../../../assets/warning.png" alt="warning" class="imgWarning">
-          <p class="textoSinPublicaciones">¡Aun no sigues a nadie!</p>
-        </div>        
+      <div *ngIf="numSeguidos === 0">
+        <app-mensajevacio class="msgVacioTexto">¡Aun no sigues a nadie, ve a la sección comunidad para buscar cuentas!</app-mensajevacio>                
+        <!-- <app-crearpublicacion></app-crearpublicacion> -->
       </div>
       <div class="contCuentas" *ngIf="numSeguidos !== 0">
+        <div></div>
         <app-cuentas></app-cuentas>
       </div>      
     </div>

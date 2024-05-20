@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import jwt from 'jsonwebtoken';
 import { QueryTypes, Sequelize } from 'sequelize';
 import sequelize from '../db/connection';
+const nodemailer = require('nodemailer');
 
 export const newUser = async (req: Request, res: Response) => {
     const {nombre, apellido, fechaNacimiento, sexo, correo, nombreUsuario, password, imgPerfil, fechaRegistro, cuentasSeguidas, seguidores, publicaciones, foros, solicitudes, reportes, tipoUsuario, modoOscuro, notificaciones, descripcion} = req.body;    
@@ -14,8 +15,7 @@ export const newUser = async (req: Request, res: Response) => {
         return res.status(400).json({
             msg: `Ya existe un usuario con el username ${nombreUsuario}`            
         });
-    }  
-
+    } 
     try{
         // Se guarda el Usuario en la BD
         await User.create({
@@ -48,9 +48,7 @@ export const newUser = async (req: Request, res: Response) => {
     res.json({
         msg: `Usuario ${nombreUsuario} creado exitosamente!`,
     })
-
 }
-
 export const loginUser = async (req: Request, res: Response) => {
     const {nombreUsuario, password} = req.body;
     console.log(nombreUsuario);
@@ -71,10 +69,77 @@ export const loginUser = async (req: Request, res: Response) => {
     // Se genera el token
     const token =  jwt.sign({
         nombreUsuario: nombreUsuario,
-        idUser: user.id
+        idUser: user.id,
+        // tipo: user.tipoUsuario
     }, process.env.SECRET_KEY || 'pepito123');
     // console.log(token);
     res.json(token);   
 }
+
+
+
+
+
+// const transporter = nodemailer.createTransport({
+//     service: 'Gmail',
+//     auth: {
+//       user: 'tuemail@gmail.com',
+//       pass: 'tucontraseña'
+//     }
+// });
+// export const reqRecoverPassword = async(req: Request, res: Response) =>{
+//     const { email } = req.body;
+//     const user:any = await User.findOne({ where: { email } });
+//     if (!user) {
+//         return res.status(404).json({
+//             msg: 'Usuario no encontrado' 
+//         });
+//     }
+//     const tokenReset = jwt.sign({ 
+//         idUser: user.id,
+//     }, process.env.SECRET_KEY || 'pepito123', { expiresIn: '1h' });
+//     user.resetToken = tokenReset;
+//     await user.save();
+    
+//     const mailOptions = {
+//         from: 'tuemail@gmail.com',
+//         to: user.email,
+//         subject: 'Recuperar Contraseña',
+//         text: `Use this link to reset your password: http://localhost:4200/reset-password/${tokenReset}`
+//     };
+//     transporter.sendMail(mailOptions, (error: any, info: any) => {
+//         if (error) {
+//           return res.status(500).json({ msg: 'Error al enviar el correo' });
+//         }
+//         res.status(200).json({ msg: 'Correo enviado' });
+//       });
+// }
+
+// export const recoverPassword = async(req: Request, res: Response) =>{
+//     const { token, newPassword } = req.body;
+//     let decoded;
+//     try {
+//         decoded = jwt.verify(token, process.env.SECRET_KEY || 'pepito123');
+//         if (typeof decoded === 'string' || !decoded.userId) {
+//             return res.status(400).json({ message: 'Token inválido' });
+//         }
+//         const user = await User.findOne({ where: { id: decoded.userId, resetToken: token } });
+//         if (!user) {
+//             return res.status(404).json({ message: 'Usuario no encontrado' });
+//         }
+//         const hashedPassword = await bcrypt.hash(newPassword, 10);
+        
+//         User.update(
+//             {password: hashedPassword, resetToken: null}, {where: {id: decoded.userId}}
+//         )
+//         await user.save();
+//         res.status(200).json({ message: 'Contraseña actualizada' });
+
+//     } catch (err) {
+//         return res.status(400).json({ message: 'Token inválido o expirado' });
+//     }
+    
+// }
+
 
 

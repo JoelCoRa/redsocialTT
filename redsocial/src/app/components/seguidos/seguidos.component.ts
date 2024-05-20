@@ -10,6 +10,9 @@ import { CrearpublicacionComponent } from "../crearpublicacion/crearpublicacion.
 import { PublicacionpropiaComponent } from "../compPerfil/publicacionpropia/publicacionpropia.component";
 import { CommonModule } from '@angular/common';
 import { CuentasComponent } from "../compPerfil/cuentas/cuentas.component";
+import { MensajevacioComponent } from "../mensajevacio/mensajevacio.component";
+import { UserService } from '../../services/user.service';
+import { CuentasService } from '../../services/cuentas.service';
 
 
 
@@ -18,16 +21,20 @@ import { CuentasComponent } from "../compPerfil/cuentas/cuentas.component";
     standalone: true,
     templateUrl: './seguidos.component.html',
     styleUrl: './seguidos.component.css',
-    imports: [MatButtonToggleModule, TituloSeccionComponent, NavbarComponent, SidebarComponent, FooterComponent, HeaderperfilComponent, CrearpublicacionComponent, PublicacionpropiaComponent, CommonModule, CuentasComponent]
+    imports: [MatButtonToggleModule, TituloSeccionComponent, NavbarComponent, SidebarComponent, FooterComponent, HeaderperfilComponent, CrearpublicacionComponent, PublicacionpropiaComponent, CommonModule, CuentasComponent, MensajevacioComponent]
 })
 export class SeguidosComponent {
   nombreUsuario: string = "Usuario";
   idUsuario: string = "0000000";
+  numPublicaciones: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private user: UserService, private cuentas: CuentasService) { }
 
+  numSeguidos: number = 0;
 
-  numSeguidos: number = 1;
+  ngOnInit(){
+    this.countSeguidos();
+  }
 
   
 
@@ -40,5 +47,14 @@ export class SeguidosComponent {
   }
   toSeguidores(){
     this.router.navigate(['/perfil/seguidores']);
+  }
+  countSeguidos(){
+    const idUser = Number(this.user.getUserId());
+    this.cuentas.countSeguidos(idUser).subscribe(data =>{
+      this.numSeguidos = data      
+      // console.log('Los seguidos son ', this.numSeguidos)
+      // this.numSeguidos = parseInt();
+      // console.log(this.numSeguidos)
+    });
   }
 }

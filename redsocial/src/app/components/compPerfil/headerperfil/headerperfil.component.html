@@ -1,21 +1,25 @@
 <div class="headerPerfil">
     <div class="contImg">
-        <img src="../../../../assets/avatars/3.jpg" alt="fotoDePerfil" class="avatarPerfil">
-        <div class="accionesImg">
-            <div class="contBotonesAvatar">
-                <button class="btnAcccionImg tooltip-container">
+        <img *ngIf="imagenPerfil === ''" src="../../../../assets/avatars/1.jpg" alt="fotoDePerfil" class="avatarPerfil">
+        <img *ngIf="imagenPerfil !== ''" [src]="base64Image" alt="fotoDePerfil" class="avatarPerfil">
+        <form class="accionesImg" [formGroup]="form">
+            <div class="contBotonesAvatar">                
+                <div class="file-upload-wrapper tooltip-container">
                     <span class="tooltip2">Sube una nueva foto</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-upload" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-                        <path d="M7 9l5 -5l5 5" />
-                        <path d="M12 4l0 12" />
-                    </svg>                  
-                </button>
+                    <input type="file" id="fileInput" (change)="onFileChange($event)"  [(ngModel)]="imgPerfil" [ngModelOptions]="{standalone: true}" />
+                    <label for="fileInput" class="custom-file-upload">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-upload" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                            <path d="M7 9l5 -5l5 5" />
+                            <path d="M12 4l0 12" />
+                        </svg> 
+                    </label>                    
+                </div>
                 <span class="span">Subir Imagen</span>
             </div>
 
-            <div class="contBotonesAvatar">                
+            <!-- <div class="contBotonesAvatar">                
             <button class="btnAcccionImg tooltip-container">
                 <span class="tooltip2">Elige un avatar de perfil</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-body-scan" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -31,8 +35,8 @@
                   </svg>
             </button>
             <span class="span">Elegir avatar</span>
-            </div>
-        </div>            
+            </div> -->
+        </form>            
     </div>
     <div class="infoPerfil">
         <div class="nombre-id">
@@ -49,8 +53,8 @@
             </div>            
         </div>
         <form class="contTextArea" *ngIf="addDescInputOpen">
-            <textarea placeholder="Añade una descripción" [value]="descripcionUsuario" maxlength="100"></textarea>
-            <button>Guardar Cambios</button>
+            <textarea placeholder="Añade una descripción" [value]="descripcionUsuario" maxlength="100" [(ngModel)]="descripcionUsuario" [ngModelOptions]="{standalone: true}" name="descripcionUsuario"></textarea>
+            <button (click)="updateDescripcion()">Guardar Cambios</button>
         </form>
         <div class="menuPerfil">
         <button class="btnMenuPerfil" [routerLink]="['/perfil']" routerLinkActive="selected"  [routerLinkActiveOptions]="{exact: true}">Publicaciones

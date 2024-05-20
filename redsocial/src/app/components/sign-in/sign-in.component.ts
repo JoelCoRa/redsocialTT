@@ -34,6 +34,13 @@ export class SignInComponent {
   isFormSubmitted: boolean = false;
   loading: boolean = false;
 
+  passwordsCoinciden: boolean = false; 
+  passwordsMatch: boolean = false;
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  action: string = 'Cerrar'; 
 
   constructor(private router: Router, private fb: FormBuilder, private sb: MatSnackBar, private user:UserService, private error: ErrorService){
     this.signInForm = new FormGroup({
@@ -44,15 +51,10 @@ export class SignInComponent {
       password: new FormControl('',[Validators.required, Validators.minLength(8)]),
       confirmPassword: new FormControl('',[Validators.required, Validators.minLength(8)]),
     })    
-  }
-  passwordsCoinciden: boolean = false; 
-  passwordsMatch: boolean = false;
-
-  
-  action: string = 'Cerrar'; 
+  }  
   onSubmit() {
     this.isFormSubmitted = true
-    // Se valida que las contrasenas sean iguales
+    // Se valida que las contraseñas sean iguales
     if (this.signInForm.get('password')?.value !== this.signInForm.get('confirmPassword')?.value) {
       this.sb.open('Las contraseñas no coinciden', this.action, {
         duration: 5000,        
@@ -62,15 +64,8 @@ export class SignInComponent {
       });
       return; // Detener el envío del formulario si las contraseñas no coinciden
     }
-    // if(this.nombre == '' || this.apellido == '' || this.correo == '' || this.nombreUsuario == '' || this.password == '' || this.confirmPassword == ''){
-    //   this.sb.open('Todos los campos son obligatorios', this.action, {
-    //     duration: 5000,        
-    //     horizontalPosition: this.horizontalPosition,
-    //     verticalPosition: this.verticalPosition,
-    //     panelClass: ['notifError'],  
-    //   });
-    //   return;
-    // } 
+
+    // Se valida que se ingresen datos
     if(this.signInForm.get('nombre')?.value === '' || this.signInForm.get('apellido')?.value === '' || this.signInForm.get('correo')?.value === '' || this.signInForm.get('password')?.value === '' || this.signInForm.get('confirmPassword')?.value === ''){
       this.sb.open('Todos los campos son obligatorios', this.action, {
         duration: 5000,        
@@ -78,7 +73,7 @@ export class SignInComponent {
         verticalPosition: this.verticalPosition,
         panelClass: ['notifError'],  
       });
-      return;
+      return; // Detener el envío del formulario si las contraseñas no coinciden
     } 
   
     const user: User = {
@@ -88,7 +83,6 @@ export class SignInComponent {
       nombreUsuario: this.nombreUsuario,
       password: this.password
     }
-    // console.log(user)
     
     this.loading = true;
     this.user.signIn(user).subscribe({
@@ -100,116 +94,15 @@ export class SignInComponent {
           verticalPosition: this.verticalPosition,
           panelClass: ['notifExito'],  
         });
-        this.router.navigate(['/login']);
-                
+        this.router.navigate(['/login']);                
       },
       error: (e: HttpErrorResponse) => {
         this.loading = false;
         this.error.msgError(e)       
       },
       complete: () => console.info('complete') 
-    })
-
-    
-
-
-    
-    // this.user.signIn(user).subscribe(data => {
-    //   // console.log('Exito')
-    //   this.loading = false;
-    //   this.sb.open(`Usuario ${user.nombreUsuario} registrado con éxito!`, this.action, {
-    //     duration: 5000,        
-    //     horizontalPosition: this.horizontalPosition,
-    //     verticalPosition: this.verticalPosition,
-    //     panelClass: ['notifExito'],  
-    //   });
-    //   this.router.navigate(['/login']);
-    // }, (event: HttpErrorResponse) => {
-    //   this.loading = false;
-    //   this.sb.open(event.error.msg, this.action, {
-    //     duration: 5000,        
-    //     horizontalPosition: this.horizontalPosition,
-    //     verticalPosition: this.verticalPosition,
-    //     panelClass: ['notifError'],  
-    //   });
-    //   this.loading= false
-    // });
-    
-    
+    });    
   }
 
-  
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-
-
-  
-
-  // addUser() {    
-  //   // Errores
-  //   // Error en los campos
-  //   this.sb.open('Campos incorrectos, revisalo e intentalo de nuevo', this.action, {
-  //     duration: 5000,        
-  //     horizontalPosition: this.horizontalPosition,
-  //     verticalPosition: this.verticalPosition,
-  //     panelClass: ['notifError'],  
-  //   });
-  //   // Contraseñas no coinciden
-  //   this.sb.open('Las contraseñas no coinciden', this.action, {
-  //     duration: 5000,        
-  //     horizontalPosition: this.horizontalPosition,
-  //     verticalPosition: this.verticalPosition,
-  //     panelClass: ['notifError'],  
-  //   });
-  //   // El nombre de usuario o correo ya existen
-  //   this.sb.open('El usuario o correo ya estan registrados', this.action, {
-  //     duration: 5000,        
-  //     horizontalPosition: this.horizontalPosition,
-  //     verticalPosition: this.verticalPosition,
-  //     panelClass: ['notifError'],  
-  //   });
-  //   // Error interno
-  //   this.sb.open('Ha ocurrido un error interno, intentalo de nuevo más tarde”', this.action, {
-  //     duration: 5000,        
-  //     horizontalPosition: this.horizontalPosition,
-  //     verticalPosition: this.verticalPosition,
-  //     panelClass: ['notifExito'],  
-  //   });
-
-
-  //   // Usuario registaro exitosamente
-  //   this.sb.open('Usuario registrado con éxito”', this.action, {
-  //     duration: 5000,        
-  //     horizontalPosition: this.horizontalPosition,
-  //     verticalPosition: this.verticalPosition,
-  //     panelClass: ['notifExito'],          
-  //   });
-
-  //   let valor = 3;
-  //   // Validar que los datos sean correctos
-  //   if(valor == 3){
-  //     this.sb.open('Campos incorrectos, revisalo e intentalo de nuevo', this.action, {
-  //       duration: 5000,        
-  //       horizontalPosition: this.horizontalPosition,
-  //       verticalPosition: this.verticalPosition,
-  //       panelClass: ['notifError'],  
-  //     });
-      
-  //   }else if(valor == 4){
-  //     this.sb.open('Usuario registrado con éxito”', this.action, {
-  //       duration: 5000,        
-  //       horizontalPosition: this.horizontalPosition,
-  //       verticalPosition: this.verticalPosition,
-  //       panelClass: ['notifExito'],          
-  //     });
-  //   }else if(valor == 5){
-  //     this.sb.open('Ha ocurrido un error interno, intentalo de nuevo más tarde”', this.action, {
-  //       duration: 5000,        
-  //       horizontalPosition: this.horizontalPosition,
-  //       verticalPosition: this.verticalPosition,
-  //       panelClass: ['notifExito'],  
-  //     });
-  //   }
-  // }
 }

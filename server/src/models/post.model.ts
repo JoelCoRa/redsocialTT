@@ -12,7 +12,9 @@ export const Post = sequelize.define('post', {
     },
     contenido:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: ""
+
     }, 
     fechaPublicacion:{
         type: DataTypes.DATEONLY,
@@ -21,15 +23,18 @@ export const Post = sequelize.define('post', {
     },
     likes:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     dislikes:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
     comentarios:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 0
     },
 });
 User.hasMany(Post); // Un usuario puede tener muchos posts

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { User, UserPerfil } from '../interfaces/user';
+import { User, UserDescripcion, UserPerfil, imgPerfilUser } from '../interfaces/user';
 import { Observable } from 'rxjs';
 import { UserLogin } from '../interfaces/user';
 import { jwtDecode } from "jwt-decode";
@@ -55,4 +55,17 @@ export class UserService {
     }
     return null;
   }
+  updateDescripcion(id: number, user: UserDescripcion): Observable<any>{
+    return this.http.put<any>(`${this.myAppUrl}api/perfil/adddescripcion/${id}`, user);
+  } 
+
+  searchComunidad(query:string): Observable<any[]>{
+    return this.http.get<any[]>(`${this.myAppUrl}api/comunidad/searchcomunidad?q=${query}`)
+  }
+
+  addImgPerfil(id:number, img:imgPerfilUser):Observable<any>{
+    return this.http.put<any>(`${this.myAppUrl}api/perfil/addimgperfil/${id}`, img);
+  }
+
+
 }

@@ -1,21 +1,22 @@
 <mat-card class="contenedorCuentas" *ngFor="let item of cuentasSeguidos">
     <mat-card-content class="cuentas">
         <div class="info">
-            <img src="../../../../assets/avatars/2.jpg" alt="" class="imgPerfil">           
+            <img *ngIf="item.imgPerfil === ''" src="../../../../assets/avatars/2.jpg" alt="" class="imgPerfil">           
+            <img *ngIf="item.imgPerfil !== ''" [src]="getProfileImage(item)" alt="" class="imgPerfil">           
             <p class="nombreCuenta">{{item.nombreUserSeguido}}</p>
         </div>
         
         <div class="accionesCuentas">
-            <button class="contAccion tooltip-container">
+            <button class="contAccion tooltip-container" (click)="deleteSeguido(item.userIdSeguido)" *ngIf="seguido" >
                 <span class="tooltip">Dejar de seguir</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-square-rounded-minus accion" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round" *ngIf="seguido">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M9 12h6" />
                     <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
                 </svg>
-                <span *ngIf="seguido" class="resp">Dejar de Seguir</span>
+                <span class="resp">Dejar de Seguir</span>
             </button>
-            <button class="contAccion tooltip-container">
+            <button class="contAccion tooltip-container" *ngIf="!seguido" (click)="addSeguidor(item.userIdSeguidor, item.nombreUserSeguidor)">
                 <span class="tooltip2">Seguir</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-handshake accion" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round" *ngIf="!seguido">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -24,9 +25,10 @@
                     <path d="M12.5 15.5l2 2" />
                     <path d="M15 13l2 2" />
                 </svg>
-                <span *ngIf="!seguido" class="resp">Seguir</span>  
+                <span  class="resp">Seguir</span>  
             </button>
-            <button class="contAccion tooltip-container">
+
+            <button class="contAccion tooltip-container" (click)="openDialog(item.userIdSeguido)">
                 <span class="tooltip3">Información de cuenta</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle accion" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

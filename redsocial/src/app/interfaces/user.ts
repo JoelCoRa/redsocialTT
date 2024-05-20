@@ -15,9 +15,20 @@ export interface UserPerfil{
     nombre: string,
     apellido: string,
     nombreUsuario: string,
-    // imgperfil:string,
+    imgPerfil:string,
     descripcion: string,
     cuentasSeguidas: number,
     seguidores: number,
     totalPosts: number
+}
+export interface UserDescripcion{
+    id:number,
+    descripcion: string
+}
+export interface SeguidoSeguidor{
+    userIdSeguido: number,
+    userIdSeguidor: number
+}
+export interface imgPerfilUser{
+    imgPerfil: string
 }

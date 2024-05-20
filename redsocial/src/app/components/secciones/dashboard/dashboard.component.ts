@@ -11,7 +11,7 @@ import { SidebarComponent } from '../../sidebar/sidebar.component';
 import {MatCardModule} from '@angular/material/card';
 import { TituloSeccionComponent } from '../../titulo-seccion/titulo-seccion.component';
 import { ChatbotComponent } from '../../chatbot/chatbot.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { UserService } from '../../../services/user.service';
 import { PublicacionComponent } from "../../publicacion/publicacion.component";
 import { MensajevacioComponent } from "../../mensajevacio/mensajevacio.component";
@@ -21,6 +21,7 @@ import { PostSeg } from '../../../interfaces/post';
 import { inject, OnInit } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { jwtDecode } from 'jwt-decode';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-dashboard',
@@ -28,7 +29,7 @@ import { jwtDecode } from 'jwt-decode';
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css',
     imports: [NavbarComponent, FooterComponent, RouterModule, MensajeSidebarComponent, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSidenavModule, SidebarComponent, MatCardModule, TituloSeccionComponent, ChatbotComponent, CommonModule, MensajevacioComponent, MatTooltipModule],
-    providers:[]
+    providers:[DatePipe]
 })
 export class DashboardComponent {
 
@@ -41,7 +42,7 @@ export class DashboardComponent {
   dislikes: number = 0;
   above: TooltipPosition = 'above';
 
-  constructor (private router: Router, private user: UserService, private posts:PostsService ){ }
+  constructor (private datePipe: DatePipe, private user: UserService, private posts:PostsService){ }
   showFiller = false;
   isRotated: boolean = false;
   isSelected: boolean = true;
@@ -62,15 +63,16 @@ export class DashboardComponent {
   }
 
   listPostSeg: PostSeg[] = []
-  fechasPublicacion: string = ''
+  fechasPublicacion: string | null = '';
+  base64Image: string ='';
 
-  getUserId(): string | null{
-    
+
+  getUserId(): string | null{    
     const token = localStorage.getItem('token')
     if (token) {
       try {
         const decodedToken: any = jwtDecode(token);
-        console.log(decodedToken.idUser)
+        // console.log(decodedToken.idUser)
         return decodedToken.id;
       } catch (error) {
         console.error('Error decodificando el token:', error);
@@ -85,16 +87,20 @@ export class DashboardComponent {
     this.posts.getPostSeg(userId).subscribe(data => {    
       this.listPostSeg = data;
       console.log(this.listPostSeg)
-      // this.usuarioPropio = this.listPostSeg[0].nombreUserSeguido;
+      console.log()
+      
 
-      // // console.log(data[0].fechaPublicacion)
-      // // console.log(this.listPostSeg);
-      // this.numPublicaciones = this.listPostSeg.length
-      // if(this.listPostSeg.length === 0){
-      //   this.numPublicaciones = 0;
-      // }
     });
   }
+  getProfileImage(user: any): string {
+
+    return this.base64Image = `data:image/png;base64,${user}`;
+  }
+
+  // transformarFecha(fechaOriginal: string): string {
+  //   let dateTime = new Date(fechaOriginal);
+  //   return this.date.transform(dateTime, 'dd \'de\' MMMM \'de\' yyyy')|| '';
+  // }
 
 
 

@@ -21,6 +21,7 @@ import { Solicitud } from './solicitud.model';
 import { Reporte } from './reporte.model';
 import { Organizacion } from './organizacion.model';
 import cors from 'cors'
+import { SeguidoSeguidor } from './seguidosseguidores.model';
 
  class Server {
     private app: Application;
@@ -56,7 +57,7 @@ import cors from 'cors'
 
     middlewares(){
         // Parseo body
-        this.app.use(express.json());
+        this.app.use(express.json({limit: '10mb'}));
         // Cors
         this.app.use(cors());
     }
@@ -69,6 +70,7 @@ import cors from 'cors'
             await Solicitud.sync(); 
             await Reporte.sync(); 
             await Organizacion.sync(); 
+            await SeguidoSeguidor.sync(); 
             await sequelize.authenticate();
             console.log('Connection has been established successfully.');
         } catch (error) {

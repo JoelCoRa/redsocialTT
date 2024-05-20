@@ -33,6 +33,7 @@ const solicitud_model_1 = require("./solicitud.model");
 const reporte_model_1 = require("./reporte.model");
 const organizacion_model_1 = require("./organizacion.model");
 const cors_1 = __importDefault(require("cors"));
+const seguidosseguidores_model_1 = require("./seguidosseguidores.model");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -61,7 +62,7 @@ class Server {
     }
     middlewares() {
         // Parseo body
-        this.app.use(express_1.default.json());
+        this.app.use(express_1.default.json({ limit: '10mb' }));
         // Cors
         this.app.use((0, cors_1.default)());
     }
@@ -75,6 +76,7 @@ class Server {
                 yield solicitud_model_1.Solicitud.sync();
                 yield reporte_model_1.Reporte.sync();
                 yield organizacion_model_1.Organizacion.sync();
+                yield seguidosseguidores_model_1.SeguidoSeguidor.sync();
                 yield connection_1.default.authenticate();
                 console.log('Connection has been established successfully.');
             }

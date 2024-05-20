@@ -46,11 +46,12 @@ exports.User = connection_1.default.define('user', {
     },
     descripcion: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'Este usuario no tiene descripción!'
     },
     imgPerfil: {
         type: sequelize_1.DataTypes.TEXT('long'),
-        allowNull: true,
+        allowNull: false,
         defaultValue: ''
     },
     fechaRegistro: {
@@ -102,4 +103,8 @@ exports.User = connection_1.default.define('user', {
         allowNull: false,
         defaultValue: false
     },
+    resetToken: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
+    }
 });

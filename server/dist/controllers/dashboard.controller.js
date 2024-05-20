@@ -17,7 +17,25 @@ const connection_1 = __importDefault(require("../db/connection"));
 const sequelize_1 = require("sequelize");
 const getPostsSeg = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const listPostsSeguidos = yield connection_1.default.query('SELECT * FROM posts inner join seguidosseguidores on posts.userId = seguidosseguidores.userIdSeguidor where seguidosseguidores.userIdSeguido = ?;', { type: sequelize_1.QueryTypes.SELECT, replacements: [id] });
+    // const listPostsSeguidos = Post.findAll({
+    //     include: [
+    //         {
+    //             model: SeguidoSeguidor,
+    //             as: 'seguidosseguidores',
+    //             required: true,
+    //         },
+    //         {
+    //             model: User,
+    //             required: true,
+    //             as: 'users',
+    //             attributes: ['imgPerfil']
+    //         }           
+    //     ],
+    //     where: {
+    //         userId: id
+    //     }
+    // })
+    const listPostsSeguidos = yield connection_1.default.query('SELECT posts.id, posts.contenido, posts.userId, posts.fechaPublicacion, seguidosseguidores.userIdSeguido, seguidosseguidores.userIdSeguidor, seguidosseguidores.nombreUserSeguido, seguidosseguidores.nombreUserSeguidor ,users.imgPerfil FROM posts inner join seguidosseguidores on posts.userId = seguidosseguidores.userIdSeguido INNER JOIN users on posts.userId = users.id where seguidosseguidores.userIdSeguidor = ? ORDER BY posts.fechaPublicacion DESC;', { type: sequelize_1.QueryTypes.SELECT, replacements: [id] });
     res.json(listPostsSeguidos);
 });
 exports.getPostsSeg = getPostsSeg;

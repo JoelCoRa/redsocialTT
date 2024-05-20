@@ -42,11 +42,12 @@ export const User = sequelize.define('user', {
     },
     descripcion: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'Este usuario no tiene descripción!'
     },    
     imgPerfil: {
         type: DataTypes.TEXT('long'),
-        allowNull: true,
+        allowNull: false,
         defaultValue: ''
     },
     fechaRegistro: {
@@ -98,4 +99,8 @@ export const User = sequelize.define('user', {
         allowNull: false,
         defaultValue: false
     },
+    resetToken: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
 })
